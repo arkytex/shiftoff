@@ -1,0 +1,64 @@
+# Builds the game and attaches it to a GitHub Release as ShiftX.zip.
+#   - Push a tag like v1.0.0  -> release "v1.0.0", and the build goes to itch.io
+#   - Run manually (Actions tab -> Release -> Run workflow) -> pre-release "build-<run number>"
+#     only (test builds don't go to itch)
+# itch.io upload needs a BUTLER_API_KEY repo secret (itch.io -> Settings -> API keys).
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write # create releases and upload the zip
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # build-nolog: the plain build script pings the template author's server
+      - run: pnpm run build-nolog
+
+      # @4x previews and UI mockups are never loaded by the game, so leave them out
+      - name: Zip build
+        working-directory: dist
+        run: zip -rq ../ShiftX.zip . -x '*@4x*' -x '*mock_*' -x '*.DS_Store'
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+            gh release create "$GITHUB_REF_NAME" ShiftX.zip --title "ShiftX $GITHUB_REF_NAME" --generate-notes
+          else
+            tag="build-$GITHUB_RUN_NUMBER"
+            gh release create "$tag" ShiftX.zip --target "$GITHUB_SHA" --title "ShiftX $tag" --generate-notes --prerelease
+          fi
+
+      # butler is itch.io's official uploader: only sends what changed, keeps version history
+      - name: Push to itch.io (arkytex/shiftx)
+        if: github.ref_type == 'tag'
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+        run: |
+          if [ -z "$BUTLER_API_KEY" ]; then
+            echo "::warning::BUTLER_API_KEY secret not set; skipping itch.io upload"
+            exit 0
+          fi
+          curl -sSfL -o butler.zip https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default
+          unzip -q butler.zip -d butler && chmod +x butler/butler
+          ./butler/butler push ShiftX.zip arkytex/shiftx:html5 --userversion "$GITHUB_REF_NAME"
