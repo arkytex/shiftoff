@@ -1,0 +1,272 @@
+{
+ "notes": [
+  "One-shot animations; anchor every frame at its centre on the impact point.",
+  "Sheets are grids of up to 8 columns, frames in reading order.",
+  "12fps sheets are every other frame of the 24fps ones."
+ ],
+ "effects": {
+  "rocket_explosion": {
+   "frame_size": [
+    192,
+    192
+   ],
+   "note": "Rocket destroyed in the atmosphere: fireball, tumbling rocket pieces trailing smoke.",
+   "sets": {
+    "24fps": {
+     "file": "rocket_explosion_24fps.png",
+     "frames": 48,
+     "fps": 24
+    },
+    "12fps": {
+     "file": "rocket_explosion_12fps.png",
+     "frames": 24,
+     "fps": 12
+    }
+   }
+  },
+  "rocket_explosion_space": {
+   "frame_size": [
+    192,
+    192
+   ],
+   "note": "Rocket destroyed in space: no smoke, pieces drift.",
+   "sets": {
+    "24fps": {
+     "file": "rocket_explosion_space_24fps.png",
+     "frames": 48,
+     "fps": 24
+    },
+    "12fps": {
+     "file": "rocket_explosion_space_12fps.png",
+     "frames": 24,
+     "fps": 12
+    }
+   }
+  },
+  "explosion_small": {
+   "frame_size": [
+    48,
+    48
+   ],
+   "note": "Drone, weather payload.",
+   "sets": {
+    "24fps": {
+     "file": "explosion_small_24fps.png",
+     "frames": 16,
+     "fps": 24
+    },
+    "12fps": {
+     "file": "explosion_small_12fps.png",
+     "frames": 8,
+     "fps": 12
+    }
+   }
+  },
+  "explosion_medium": {
+   "frame_size": [
+    80,
+    80
+   ],
+   "note": "Prop plane, hot-air balloon.",
+   "sets": {
+    "24fps": {
+     "file": "explosion_medium_24fps.png",
+     "frames": 24,
+     "fps": 24
+    },
+    "12fps": {
+     "file": "explosion_medium_12fps.png",
+     "frames": 12,
+     "fps": 12
+    }
+   }
+  },
+  "explosion_large": {
+   "frame_size": [
+    128,
+    128
+   ],
+   "note": "Airliner.",
+   "sets": {
+    "24fps": {
+     "file": "explosion_large_24fps.png",
+     "frames": 32,
+     "fps": 24
+    },
+    "12fps": {
+     "file": "explosion_large_12fps.png",
+     "frames": 16,
+     "fps": 12
+    }
+   }
+  },
+  "explosion_space": {
+   "frame_size": [
+    80,
+    80
+   ],
+   "note": "Satellite, space junk.",
+   "sets": {
+    "24fps": {
+     "file": "explosion_space_24fps.png",
+     "frames": 24,
+     "fps": 24
+    },
+    "12fps": {
+     "file": "explosion_space_12fps.png",
+     "frames": 12,
+     "fps": 12
+    }
+   }
+  },
+  "asteroid_shatter": {
+   "frame_size": [
+    80,
+    80
+   ],
+   "note": "Asteroids (scale 0.6 small, 1.5 large).",
+   "sets": {
+    "24fps": {
+     "file": "asteroid_shatter_24fps.png",
+     "frames": 24,
+     "fps": 24
+    },
+    "12fps": {
+     "file": "asteroid_shatter_12fps.png",
+     "frames": 12,
+     "fps": 12
+    }
+   }
+  },
+  "feather_puff": {
+   "frame_size": [
+    48,
+    48
+   ],
+   "note": "Birds.",
+   "sets": {
+    "24fps": {
+     "file": "feather_puff_24fps.png",
+     "frames": 20,
+     "fps": 24
+    },
+    "12fps": {
+     "file": "feather_puff_12fps.png",
+     "frames": 10,
+     "fps": 12
+    }
+   }
+  },
+  "balloon_pop": {
+   "frame_size": [
+    40,
+    40
+   ],
+   "note": "Weather balloon.",
+   "sets": {
+    "24fps": {
+     "file": "balloon_pop_24fps.png",
+     "frames": 12,
+     "fps": 24
+    },
+    "12fps": {
+     "file": "balloon_pop_12fps.png",
+     "frames": 6,
+     "fps": 12
+    }
+   }
+  },
+  "zap": {
+   "frame_size": [
+    48,
+    48
+   ],
+   "note": "Lightning strike on the rocket from a storm cloud (cloud survives).",
+   "sets": {
+    "24fps": {
+     "file": "zap_24fps.png",
+     "frames": 12,
+     "fps": 24
+    },
+    "12fps": {
+     "file": "zap_12fps.png",
+     "frames": 6,
+     "fps": 12
+    }
+   }
+  },
+  "hit_spark": {
+   "frame_size": [
+    24,
+    24
+   ],
+   "note": "Small impact / near miss.",
+   "sets": {
+    "24fps": {
+     "file": "hit_spark_24fps.png",
+     "frames": 8,
+     "fps": 24
+    },
+    "12fps": {
+     "file": "hit_spark_12fps.png",
+     "frames": 4,
+     "fps": 12
+    }
+   }
+  }
+ },
+ "obstacle_effect": {
+  "bird": {
+   "effect": "feather_puff",
+   "scale": 1.0
+  },
+  "bird_flock": {
+   "effect": "feather_puff",
+   "scale": 1.6
+  },
+  "drone": {
+   "effect": "explosion_small",
+   "scale": 1.0
+  },
+  "hot_air_balloon": {
+   "effect": "explosion_medium",
+   "scale": 1.0
+  },
+  "prop_plane": {
+   "effect": "explosion_medium",
+   "scale": 1.0
+  },
+  "airliner": {
+   "effect": "explosion_large",
+   "scale": 1.0
+  },
+  "storm_cloud": {
+   "effect": "zap",
+   "scale": 1.0
+  },
+  "weather_balloon": {
+   "effect": "balloon_pop",
+   "scale": 1.0
+  },
+  "satellite": {
+   "effect": "explosion_space",
+   "scale": 1.0
+  },
+  "asteroid_small": {
+   "effect": "asteroid_shatter",
+   "scale": 0.6
+  },
+  "asteroid_medium": {
+   "effect": "asteroid_shatter",
+   "scale": 1.0
+  },
+  "asteroid_large": {
+   "effect": "asteroid_shatter",
+   "scale": 1.5
+  },
+  "space_junk": {
+   "effect": "explosion_space",
+   "scale": 0.8
+  }
+ }
+}

@@ -1,0 +1,354 @@
+{
+ "notes": [
+  "All obstacles face right; flipX for leftward movement.",
+  "Hitboxes are in frame-local pixels, ~10% smaller than the art to feel fair.",
+  "Altitude ranges use the prototype's scale (1 px of climb = 2 m)."
+ ],
+ "obstacles": {
+  "bird": {
+   "file": "bird.png",
+   "band": "low",
+   "frame_size": [
+    15,
+    10
+   ],
+   "frames": 4,
+   "fps": 10,
+   "altitude_m": [
+    150,
+    1500
+   ],
+   "speed_px_per_s": [
+    30,
+    60
+   ],
+   "hitbox": {
+    "type": "rect",
+    "x": 2,
+    "y": 1,
+    "w": 11,
+    "h": 7
+   },
+   "note": "Single gull; flaps."
+  },
+  "bird_flock": {
+   "file": "bird_flock.png",
+   "band": "low",
+   "frame_size": [
+    52,
+    26
+   ],
+   "frames": 4,
+   "fps": 10,
+   "altitude_m": [
+    150,
+    1500
+   ],
+   "speed_px_per_s": [
+    25,
+    50
+   ],
+   "hitbox": {
+    "type": "rect",
+    "x": 7,
+    "y": 5,
+    "w": 39,
+    "h": 18
+   },
+   "note": "Five gulls, staggered flaps."
+  },
+  "drone": {
+   "file": "drone.png",
+   "band": "low",
+   "frame_size": [
+    22,
+    10
+   ],
+   "frames": 4,
+   "fps": 16,
+   "altitude_m": [
+    50,
+    1200
+   ],
+   "speed_px_per_s": [
+    20,
+    45
+   ],
+   "hitbox": {
+    "type": "rect",
+    "x": 2,
+    "y": 1,
+    "w": 18,
+    "h": 7
+   },
+   "note": "Quadcopter; can hover or zig-zag."
+  },
+  "hot_air_balloon": {
+   "file": "hot_air_balloon.png",
+   "band": "mid",
+   "frame_size": [
+    32,
+    46
+   ],
+   "frames": 4,
+   "fps": 8,
+   "altitude_m": [
+    800,
+    4000
+   ],
+   "speed_px_per_s": [
+    8,
+    18
+   ],
+   "hitbox": {
+    "type": "rect",
+    "x": 4,
+    "y": 4,
+    "w": 24,
+    "h": 36
+   },
+   "note": "Slow drift; burner flickers."
+  },
+  "prop_plane": {
+   "file": "prop_plane.png",
+   "band": "mid",
+   "frame_size": [
+    44,
+    18
+   ],
+   "frames": 4,
+   "fps": 16,
+   "altitude_m": [
+    1500,
+    6000
+   ],
+   "speed_px_per_s": [
+    70,
+    110
+   ],
+   "hitbox": {
+    "type": "rect",
+    "x": 4,
+    "y": 2,
+    "w": 35,
+    "h": 13
+   },
+   "note": "Fast horizontal pass."
+  },
+  "airliner": {
+   "file": "airliner.png",
+   "band": "mid",
+   "frame_size": [
+    84,
+    26
+   ],
+   "frames": 4,
+   "fps": 6,
+   "altitude_m": [
+    6000,
+    12000
+   ],
+   "speed_px_per_s": [
+    90,
+    140
+   ],
+   "hitbox": {
+    "type": "rect",
+    "x": 11,
+    "y": 2,
+    "w": 62,
+    "h": 17
+   },
+   "note": "Big; lit windows, strobes."
+  },
+  "storm_cloud": {
+   "file": "storm_cloud.png",
+   "band": "high",
+   "frame_size": [
+    76,
+    58
+   ],
+   "frames": 8,
+   "fps": 8,
+   "altitude_m": [
+    4000,
+    14000
+   ],
+   "speed_px_per_s": [
+    5,
+    12
+   ],
+   "hitbox": {
+    "type": "rect",
+    "x": 8,
+    "y": 6,
+    "w": 59,
+    "h": 46
+   },
+   "note": "Lightning on frames 5-6: only hurts while flashing, if you like."
+  },
+  "weather_balloon": {
+   "file": "weather_balloon.png",
+   "band": "high",
+   "frame_size": [
+    22,
+    44
+   ],
+   "frames": 4,
+   "fps": 6,
+   "altitude_m": [
+    12000,
+    32000
+   ],
+   "speed_px_per_s": [
+    5,
+    15
+   ],
+   "hitbox": {
+    "type": "rect",
+    "x": 3,
+    "y": 4,
+    "w": 16,
+    "h": 34
+   },
+   "note": "Rises slowly; payload swings."
+  },
+  "satellite": {
+   "file": "satellite.png",
+   "band": "space",
+   "frame_size": [
+    46,
+    22
+   ],
+   "frames": 8,
+   "fps": 10,
+   "altitude_m": [
+    35000,
+    999999
+   ],
+   "speed_px_per_s": [
+    15,
+    40
+   ],
+   "hitbox": {
+    "type": "rect",
+    "x": 5,
+    "y": 2,
+    "w": 36,
+    "h": 14
+   },
+   "note": "Panels glint."
+  },
+  "asteroid_small": {
+   "file": "asteroid_small.png",
+   "band": "space",
+   "frame_size": [
+    20,
+    20
+   ],
+   "frames": 8,
+   "fps": 10,
+   "altitude_m": [
+    40000,
+    999999
+   ],
+   "speed_px_per_s": [
+    30,
+    70
+   ],
+   "hitbox": {
+    "type": "circle",
+    "x": 10.0,
+    "y": 10.0,
+    "r": 8.5
+   },
+   "note": "Spins."
+  },
+  "asteroid_medium": {
+   "file": "asteroid_medium.png",
+   "band": "space",
+   "frame_size": [
+    28,
+    28
+   ],
+   "frames": 8,
+   "fps": 8,
+   "altitude_m": [
+    40000,
+    999999
+   ],
+   "speed_px_per_s": [
+    20,
+    50
+   ],
+   "hitbox": {
+    "type": "circle",
+    "x": 14.0,
+    "y": 14.0,
+    "r": 11.9
+   },
+   "note": "Spins."
+  },
+  "asteroid_large": {
+   "file": "asteroid_large.png",
+   "band": "space",
+   "frame_size": [
+    40,
+    40
+   ],
+   "frames": 8,
+   "fps": 6,
+   "altitude_m": [
+    45000,
+    999999
+   ],
+   "speed_px_per_s": [
+    10,
+    30
+   ],
+   "hitbox": {
+    "type": "circle",
+    "x": 20.0,
+    "y": 20.0,
+    "r": 17.0
+   },
+   "note": "Spins."
+  },
+  "space_junk": {
+   "file": "space_junk.png",
+   "band": "space",
+   "frame_size": [
+    34,
+    34
+   ],
+   "frames": 8,
+   "fps": 10,
+   "altitude_m": [
+    30000,
+    999999
+   ],
+   "speed_px_per_s": [
+    20,
+    60
+   ],
+   "hitbox": {
+    "type": "rect",
+    "x": 4,
+    "y": 5,
+    "w": 25,
+    "h": 24
+   },
+   "note": "Tumbling spent ShiftX stage."
+  }
+ },
+ "warning_indicator": {
+  "file": "warning_indicator.png",
+  "frame_size": [
+   11,
+   10
+  ],
+  "frames": 2,
+  "fps": 4,
+  "note": "Show at the screen edge where an obstacle is about to enter."
+ }
+}

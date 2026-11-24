@@ -1,0 +1,592 @@
+{
+ "notes": [
+  "Sizes are native pixels. Sheets are grids of up to 8 columns, frames in reading order.",
+  "nine_slice entries give the corner insets for Phaser's add.nineslice().",
+  "number_slot / text anchors are in the asset's own pixel space."
+ ],
+ "assets": {
+  "fonts/shiftx_body.png": {
+   "type": "bitmap_font",
+   "xml": "fonts/shiftx_body.xml",
+   "line_height": 10,
+   "note": "Proportional 5x7 with lowercase + descenders, full printable ASCII. White: tint in-engine."
+  },
+  "fonts/shiftx_body_outline.png": {
+   "type": "bitmap_font",
+   "xml": "fonts/shiftx_body_outline.xml",
+   "line_height": 12,
+   "note": "Body with a baked 1px ink outline, for text over the sky."
+  },
+  "fonts/shiftx_small.png": {
+   "type": "bitmap_font",
+   "xml": "fonts/shiftx_small.xml",
+   "line_height": 6,
+   "note": "3x5 caps and digits for HUD labels (uppercase only)."
+  },
+  "fonts/shiftx_small_outline.png": {
+   "type": "bitmap_font",
+   "xml": "fonts/shiftx_small_outline.xml",
+   "line_height": 8,
+   "note": "Small with a baked ink outline."
+  },
+  "fonts/shiftx_title.png": {
+   "type": "bitmap_font",
+   "xml": "fonts/shiftx_title.xml",
+   "line_height": 20,
+   "note": "Body caps at 2x with shading, outline and drop shadow. White family: tint for colour."
+  },
+  "fonts/shiftx_digits.png": {
+   "type": "bitmap_font",
+   "xml": "fonts/shiftx_digits.xml",
+   "line_height": 21,
+   "note": "Bold 2x digits plus , . : + - x m ! for scores and big numbers."
+  },
+  "kit/panel_night.png": {
+   "size": [
+    24,
+    24
+   ],
+   "type": "nine_slice",
+   "slice": {
+    "left": 6,
+    "right": 6,
+    "top": 6,
+    "bottom": 6
+   },
+   "note": "Default dark glass panel (menus, cards over the sky)."
+  },
+  "kit/panel_paper.png": {
+   "size": [
+    24,
+    24
+   ],
+   "type": "nine_slice",
+   "slice": {
+    "left": 6,
+    "right": 6,
+    "top": 6,
+    "bottom": 6
+   },
+   "note": "Light card (Shiftter posts, popups)."
+  },
+  "kit/panel_accent.png": {
+   "size": [
+    24,
+    24
+   ],
+   "type": "nine_slice",
+   "slice": {
+    "left": 6,
+    "right": 6,
+    "top": 6,
+    "bottom": 6
+   },
+   "note": "Dark panel with ShiftX-orange bevel (highlighted / selected)."
+  },
+  "kit/panel_gold.png": {
+   "size": [
+    24,
+    24
+   ],
+   "type": "nine_slice",
+   "slice": {
+    "left": 6,
+    "right": 6,
+    "top": 6,
+    "bottom": 6
+   },
+   "note": "Dark panel with gold bevel (records, NEW BEST)."
+  },
+  "kit/plate_inset.png": {
+   "size": [
+    16,
+    16
+   ],
+   "type": "nine_slice",
+   "slice": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 4
+   },
+   "note": "Recessed plate for numbers (scores, altitude)."
+  },
+  "kit/button_normal.png": {
+   "size": [
+    48,
+    18
+   ],
+   "type": "nine_slice",
+   "slice": {
+    "left": 5,
+    "right": 5,
+    "top": 4,
+    "bottom": 6
+   },
+   "label_offset_y": 0,
+   "note": "Draw the label with shiftx_body tinted #16142a, centred on the face; add label_offset_y when pressed."
+  },
+  "kit/button_hover.png": {
+   "size": [
+    48,
+    18
+   ],
+   "type": "nine_slice",
+   "slice": {
+    "left": 5,
+    "right": 5,
+    "top": 4,
+    "bottom": 6
+   },
+   "label_offset_y": 0,
+   "note": "Draw the label with shiftx_body tinted #16142a, centred on the face; add label_offset_y when pressed."
+  },
+  "kit/button_pressed.png": {
+   "size": [
+    48,
+    18
+   ],
+   "type": "nine_slice",
+   "slice": {
+    "left": 5,
+    "right": 5,
+    "top": 4,
+    "bottom": 6
+   },
+   "label_offset_y": 2,
+   "note": "Draw the label with shiftx_body tinted #16142a, centred on the face; add label_offset_y when pressed."
+  },
+  "kit/button_disabled.png": {
+   "size": [
+    48,
+    18
+   ],
+   "type": "nine_slice",
+   "slice": {
+    "left": 5,
+    "right": 5,
+    "top": 4,
+    "bottom": 6
+   },
+   "label_offset_y": 0,
+   "note": "Draw the label with shiftx_body tinted #16142a, centred on the face; add label_offset_y when pressed."
+  },
+  "kit/click_icon.png": {
+   "size": [
+    104,
+    26
+   ],
+   "frame_size": [
+    26,
+    26
+   ],
+   "frames": 4,
+   "fps": 6,
+   "loop": true,
+   "layout": "grid, 4 columns, reading order",
+   "note": "Animated 'click / tap' hint. Pair with 'Click to launch' in shiftx_body_outline."
+  },
+  "start/logo_animated.png": {
+   "size": [
+    1056,
+    102
+   ],
+   "frame_size": [
+    132,
+    34
+   ],
+   "frames": 24,
+   "fps": 12,
+   "loop": true,
+   "layout": "grid, 8 columns, reading order",
+   "note": "Native-size ShiftX logo: shine sweep, then the X arrow nudges up-right. Loop at 12 fps."
+  },
+  "start/logo_static.png": {
+   "size": [
+    132,
+    34
+   ]
+  },
+  "start/tagline.png": {
+   "size": [
+    127,
+    13
+   ],
+   "text": "Two boosters. Zero chill."
+  },
+  "start/controls_card.png": {
+   "size": [
+    176,
+    84
+   ],
+   "note": "Baked card. Rebuild from panel_night + keycaps if you change the copy."
+  },
+  "start/best_score_plate.png": {
+   "size": [
+    104,
+    24
+   ],
+   "number_slot": {
+    "x": 40,
+    "y": 4,
+    "w": 58,
+    "h": 16,
+    "font": "shiftx_body_outline",
+    "align": "right"
+   }
+  },
+  "start/searchlight_beam.png": {
+   "size": [
+    50,
+    200
+   ],
+   "origin": [
+    0.5,
+    1.0
+   ],
+   "blend": "ADD",
+   "note": "Rotate around the bottom-centre, e.g. angle = sin(t*0.6)*22 deg, two beams out of phase."
+  },
+  "start/searchlight_lamp.png": {
+   "size": [
+    12,
+    14
+   ],
+   "origin": [
+    0.5,
+    1.0
+   ],
+   "beam_origin_in_lamp": [
+    6,
+    2
+   ]
+  },
+  "start/countdown.png": {
+   "size": [
+    1024,
+    364
+   ],
+   "frame_size": [
+    128,
+    52
+   ],
+   "frames": 52,
+   "fps": 12,
+   "loop": false,
+   "layout": "grid, 8 columns, reading order",
+   "ranges": {
+    "3": [
+     0,
+     11
+    ],
+    "2": [
+     12,
+     23
+    ],
+    "1": [
+     24,
+     35
+    ],
+    "liftoff": [
+     36,
+     51
+    ]
+   },
+   "note": "Play 3, 2, 1 (1 s each at 12 fps), then liftoff. Anchor: frame centre."
+  },
+  "gameover/shiftter_icon.png": {
+   "size": [
+    16,
+    16
+   ]
+  },
+  "gameover/shiftter_logo.png": {
+   "size": [
+    106,
+    22
+   ]
+  },
+  "gameover/shiftter_icons.png": {
+   "size": [
+    104,
+    13
+   ],
+   "frame_size": [
+    13,
+    13
+   ],
+   "frames": 8,
+   "fps": 0,
+   "loop": false,
+   "layout": "grid, 8 columns, reading order",
+   "names": [
+    "reply",
+    "reshift",
+    "reshift_active",
+    "like",
+    "like_active",
+    "views",
+    "share",
+    "more"
+   ],
+   "note": "Static icon strip, one icon per frame."
+  },
+  "gameover/like_pop.png": {
+   "size": [
+    208,
+    52
+   ],
+   "frame_size": [
+    26,
+    26
+   ],
+   "frames": 10,
+   "fps": 24,
+   "loop": false,
+   "layout": "grid, 8 columns, reading order",
+   "note": "Grey outline -> squash -> burst -> red heart. Anchor centre."
+  },
+  "gameover/verified_badge.png": {
+   "size": [
+    11,
+    11
+   ]
+  },
+  "gameover/shiftter_card_bg.png": {
+   "size": [
+    208,
+    66
+   ],
+   "layout": {
+    "avatar": [
+     6,
+     6
+    ],
+    "name": [
+     36,
+     6
+    ],
+    "badge_gap": 2,
+    "handle_gap": 4,
+    "text": [
+     36,
+     18
+    ],
+    "text_width": 164,
+    "text_line_height": 10,
+    "max_lines": 3,
+    "icons_y": 52,
+    "icons_x": [
+     36,
+     80,
+     124,
+     168
+    ],
+    "count_offset": [
+     14,
+     4
+    ]
+   },
+   "note": "Or build any size from kit/panel_paper (9-slice 6). Layout coordinates are card-local."
+  },
+  "gameover/shiftter_feed_header.png": {
+   "size": [
+    208,
+    22
+   ]
+  },
+  "gameover/avatars.png": {
+   "size": [
+    192,
+    72
+   ],
+   "frame_size": [
+    24,
+    24
+   ],
+   "frames": 23,
+   "fps": 0,
+   "loop": false,
+   "layout": "grid, 8 columns, reading order",
+   "note": "23 avatars, 24x24; frame index = accounts.json order."
+  },
+  "gameover/shiftter_card_example.png": {
+   "size": [
+    208,
+    66
+   ]
+  },
+  "gameover/banner_crashed.png": {
+   "size": [
+    135,
+    32
+   ],
+   "text": "CRASHED!"
+  },
+  "gameover/banner_lost_balance.png": {
+   "size": [
+    187,
+    32
+   ],
+   "text": "LOST BALANCE"
+  },
+  "gameover/banner_bird_strike.png": {
+   "size": [
+    167,
+    32
+   ],
+   "text": "BIRD STRIKE"
+  },
+  "gameover/banner_midair.png": {
+   "size": [
+    189,
+    32
+   ],
+   "text": "MID-AIR CRASH"
+  },
+  "gameover/banner_zapped.png": {
+   "size": [
+    123,
+    32
+   ],
+   "text": "ZAPPED!"
+  },
+  "gameover/banner_asteroid.png": {
+   "size": [
+    179,
+    32
+   ],
+   "text": "ASTEROID HIT"
+  },
+  "gameover/banner_space_junk.png": {
+   "size": [
+    187,
+    32
+   ],
+   "text": "SPACE JUNKED"
+  },
+  "gameover/banner_orbit.png": {
+   "size": [
+    195,
+    32
+   ],
+   "text": "ORBIT REACHED"
+  },
+  "gameover/banner_for_cause": {
+   "tip_over": "lost_balance",
+   "ground": "crashed",
+   "bird": "bird_strike",
+   "bird_flock": "bird_strike",
+   "drone": "midair",
+   "prop_plane": "midair",
+   "airliner": "midair",
+   "hot_air_balloon": "midair",
+   "weather_balloon": "midair",
+   "storm_cloud": "zapped",
+   "asteroid_small": "asteroid",
+   "asteroid_medium": "asteroid",
+   "asteroid_large": "asteroid",
+   "satellite": "space_junk",
+   "space_junk": "space_junk",
+   "win": "orbit"
+  },
+  "gameover/new_best_ribbon.png": {
+   "size": [
+    1208,
+    38
+   ],
+   "frame_size": [
+    151,
+    38
+   ],
+   "frames": 8,
+   "fps": 12,
+   "loop": true,
+   "layout": "grid, 8 columns, reading order"
+  },
+  "gameover/score_plate.png": {
+   "size": [
+    150,
+    38
+   ],
+   "number_slot": {
+    "x": 144,
+    "y": 14,
+    "align": "right",
+    "font": "shiftx_digits"
+   }
+  },
+  "hud/throttle_gauge_l.png": {
+   "size": [
+    104,
+    128
+   ],
+   "frame_size": [
+    13,
+    64
+   ],
+   "frames": 11,
+   "fps": 0,
+   "loop": false,
+   "layout": "grid, 8 columns, reading order",
+   "note": "Frame = throttle level 0..10 (round(throttle*10))."
+  },
+  "hud/throttle_gauge_r.png": {
+   "size": [
+    104,
+    128
+   ],
+   "frame_size": [
+    13,
+    64
+   ],
+   "frames": 11,
+   "fps": 0,
+   "loop": false,
+   "layout": "grid, 8 columns, reading order",
+   "note": "Frame = throttle level 0..10 (round(throttle*10))."
+  },
+  "hud/altitude_plate.png": {
+   "size": [
+    84,
+    15
+   ],
+   "number_slot": {
+    "x": 73,
+    "y": 3,
+    "align": "right",
+    "font": "shiftx_body_outline"
+   }
+  },
+  "hud/unstable_flasher.png": {
+   "size": [
+    304,
+    15
+   ],
+   "frame_size": [
+    76,
+    15
+   ],
+   "frames": 4,
+   "fps": 8,
+   "loop": true,
+   "layout": "grid, 4 columns, reading order",
+   "note": "Show when |tilt| is in the red zone."
+  },
+  "hud/balance_meter_danger.png": {
+   "size": [
+    404,
+    11
+   ],
+   "frame_size": [
+    101,
+    11
+   ],
+   "frames": 4,
+   "fps": 8,
+   "loop": true,
+   "layout": "grid, 4 columns, reading order",
+   "note": "Same size as balance_meter.png; swap in when in the red zone. Marker unchanged."
+  }
+ }
+}

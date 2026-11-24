@@ -1,0 +1,1830 @@
+{
+ "notes": [
+  "All coordinates are native pixels. @4x files are nearest-neighbour upscales.",
+  "Angles are degrees, clockwise positive (tilting right). 0 = upright.",
+  "Only the boosters fire: Left Shift -> left booster, Right Shift -> right booster.",
+  "Left booster thrust tilts the rocket clockwise (right); right booster tilts it counter-clockwise."
+ ],
+ "sprites": {
+  "core": {
+   "file": "sprites/shiftx_core.png",
+   "size": [
+    22,
+    101
+   ]
+  },
+  "booster_left": {
+   "file": "sprites/shiftx_booster_left.png",
+   "size": [
+    20,
+    64
+   ],
+   "nozzle": {
+    "x": 10,
+    "y": 62,
+    "half_width": 5
+   }
+  },
+  "booster_right": {
+   "file": "sprites/shiftx_booster_right.png",
+   "size": [
+    20,
+    64
+   ],
+   "nozzle": {
+    "x": 10,
+    "y": 62,
+    "half_width": 5
+   }
+  },
+  "assembled": {
+   "file": "sprites/shiftx_assembled.png",
+   "size": [
+    48,
+    101
+   ],
+   "booster_left_offset": [
+    -11,
+    37
+   ],
+   "booster_right_offset": [
+    13,
+    37
+   ],
+   "pivot_center_of_mass": [
+    24,
+    62
+   ],
+   "nozzle_left": [
+    12,
+    99
+   ],
+   "nozzle_right": [
+    36,
+    99
+   ]
+  }
+ },
+ "rotation": {
+  "file": "sprites/shiftx_rotation_sheet.png",
+  "frame_size": [
+   138,
+   138
+  ],
+  "columns": 12,
+  "angle_step": 3,
+  "pivot_in_frame": [
+   69,
+   69
+  ],
+  "pick_frame": "index = round((wrap(angle,-180,180) + 177) / 3) clamped 0..119",
+  "frames": [
+   {
+    "index": 0,
+    "angle": -177,
+    "x": 0,
+    "y": 0,
+    "nozzle_left": [
+     82.92,
+     32.68
+    ],
+    "nozzle_right": [
+     58.95,
+     31.42
+    ]
+   },
+   {
+    "index": 1,
+    "angle": -174,
+    "x": 138,
+    "y": 0,
+    "nozzle_left": [
+     84.8,
+     33.46
+    ],
+    "nozzle_right": [
+     60.93,
+     30.95
+    ]
+   },
+   {
+    "index": 2,
+    "angle": -171,
+    "x": 276,
+    "y": 0,
+    "nozzle_left": [
+     86.64,
+     34.33
+    ],
+    "nozzle_right": [
+     62.94,
+     30.58
+    ]
+   },
+   {
+    "index": 3,
+    "angle": -168,
+    "x": 414,
+    "y": 0,
+    "nozzle_left": [
+     88.43,
+     35.3
+    ],
+    "nozzle_right": [
+     64.95,
+     30.31
+    ]
+   },
+   {
+    "index": 4,
+    "angle": -165,
+    "x": 552,
+    "y": 0,
+    "nozzle_left": [
+     90.17,
+     36.37
+    ],
+    "nozzle_right": [
+     66.99,
+     30.15
+    ]
+   },
+   {
+    "index": 5,
+    "angle": -162,
+    "x": 690,
+    "y": 0,
+    "nozzle_left": [
+     91.85,
+     37.52
+    ],
+    "nozzle_right": [
+     69.02,
+     30.1
+    ]
+   },
+   {
+    "index": 6,
+    "angle": -159,
+    "x": 828,
+    "y": 0,
+    "nozzle_left": [
+     93.46,
+     38.76
+    ],
+    "nozzle_right": [
+     71.06,
+     30.16
+    ]
+   },
+   {
+    "index": 7,
+    "angle": -156,
+    "x": 966,
+    "y": 0,
+    "nozzle_left": [
+     95.01,
+     40.08
+    ],
+    "nozzle_right": [
+     73.09,
+     30.32
+    ]
+   },
+   {
+    "index": 8,
+    "angle": -153,
+    "x": 1104,
+    "y": 0,
+    "nozzle_left": [
+     96.49,
+     41.48
+    ],
+    "nozzle_right": [
+     75.11,
+     30.58
+    ]
+   },
+   {
+    "index": 9,
+    "angle": -150,
+    "x": 1242,
+    "y": 0,
+    "nozzle_left": [
+     97.89,
+     42.96
+    ],
+    "nozzle_right": [
+     77.11,
+     30.96
+    ]
+   },
+   {
+    "index": 10,
+    "angle": -147,
+    "x": 1380,
+    "y": 0,
+    "nozzle_left": [
+     99.22,
+     44.5
+    ],
+    "nozzle_right": [
+     79.09,
+     31.43
+    ]
+   },
+   {
+    "index": 11,
+    "angle": -144,
+    "x": 1518,
+    "y": 0,
+    "nozzle_left": [
+     100.46,
+     46.12
+    ],
+    "nozzle_right": [
+     81.04,
+     32.01
+    ]
+   },
+   {
+    "index": 12,
+    "angle": -141,
+    "x": 0,
+    "y": 138,
+    "nozzle_left": [
+     101.61,
+     47.8
+    ],
+    "nozzle_right": [
+     82.96,
+     32.69
+    ]
+   },
+   {
+    "index": 13,
+    "angle": -138,
+    "x": 138,
+    "y": 138,
+    "nozzle_left": [
+     102.68,
+     49.53
+    ],
+    "nozzle_right": [
+     84.84,
+     33.47
+    ]
+   },
+   {
+    "index": 14,
+    "angle": -135,
+    "x": 276,
+    "y": 138,
+    "nozzle_left": [
+     103.65,
+     51.32
+    ],
+    "nozzle_right": [
+     86.68,
+     34.35
+    ]
+   },
+   {
+    "index": 15,
+    "angle": -132,
+    "x": 414,
+    "y": 138,
+    "nozzle_left": [
+     104.53,
+     53.16
+    ],
+    "nozzle_right": [
+     88.47,
+     35.32
+    ]
+   },
+   {
+    "index": 16,
+    "angle": -129,
+    "x": 552,
+    "y": 138,
+    "nozzle_left": [
+     105.31,
+     55.04
+    ],
+    "nozzle_right": [
+     90.2,
+     36.39
+    ]
+   },
+   {
+    "index": 17,
+    "angle": -126,
+    "x": 690,
+    "y": 138,
+    "nozzle_left": [
+     105.99,
+     56.96
+    ],
+    "nozzle_right": [
+     91.88,
+     37.54
+    ]
+   },
+   {
+    "index": 18,
+    "angle": -123,
+    "x": 828,
+    "y": 138,
+    "nozzle_left": [
+     106.57,
+     58.91
+    ],
+    "nozzle_right": [
+     93.5,
+     38.78
+    ]
+   },
+   {
+    "index": 19,
+    "angle": -120,
+    "x": 966,
+    "y": 138,
+    "nozzle_left": [
+     107.04,
+     60.89
+    ],
+    "nozzle_right": [
+     95.04,
+     40.11
+    ]
+   },
+   {
+    "index": 20,
+    "angle": -117,
+    "x": 1104,
+    "y": 138,
+    "nozzle_left": [
+     107.42,
+     62.89
+    ],
+    "nozzle_right": [
+     96.52,
+     41.51
+    ]
+   },
+   {
+    "index": 21,
+    "angle": -114,
+    "x": 1242,
+    "y": 138,
+    "nozzle_left": [
+     107.68,
+     64.91
+    ],
+    "nozzle_right": [
+     97.92,
+     42.99
+    ]
+   },
+   {
+    "index": 22,
+    "angle": -111,
+    "x": 1380,
+    "y": 138,
+    "nozzle_left": [
+     107.84,
+     66.94
+    ],
+    "nozzle_right": [
+     99.24,
+     44.54
+    ]
+   },
+   {
+    "index": 23,
+    "angle": -108,
+    "x": 1518,
+    "y": 138,
+    "nozzle_left": [
+     107.9,
+     68.98
+    ],
+    "nozzle_right": [
+     100.48,
+     46.15
+    ]
+   },
+   {
+    "index": 24,
+    "angle": -105,
+    "x": 0,
+    "y": 276,
+    "nozzle_left": [
+     107.85,
+     71.01
+    ],
+    "nozzle_right": [
+     101.63,
+     47.83
+    ]
+   },
+   {
+    "index": 25,
+    "angle": -102,
+    "x": 138,
+    "y": 276,
+    "nozzle_left": [
+     107.69,
+     73.05
+    ],
+    "nozzle_right": [
+     102.7,
+     49.57
+    ]
+   },
+   {
+    "index": 26,
+    "angle": -99,
+    "x": 276,
+    "y": 276,
+    "nozzle_left": [
+     107.42,
+     75.06
+    ],
+    "nozzle_right": [
+     103.67,
+     51.36
+    ]
+   },
+   {
+    "index": 27,
+    "angle": -96,
+    "x": 414,
+    "y": 276,
+    "nozzle_left": [
+     107.05,
+     77.07
+    ],
+    "nozzle_right": [
+     104.54,
+     53.2
+    ]
+   },
+   {
+    "index": 28,
+    "angle": -93,
+    "x": 552,
+    "y": 276,
+    "nozzle_left": [
+     106.58,
+     79.05
+    ],
+    "nozzle_right": [
+     105.32,
+     55.08
+    ]
+   },
+   {
+    "index": 29,
+    "angle": -90,
+    "x": 690,
+    "y": 276,
+    "nozzle_left": [
+     106.0,
+     81.0
+    ],
+    "nozzle_right": [
+     106.0,
+     57.0
+    ]
+   },
+   {
+    "index": 30,
+    "angle": -87,
+    "x": 828,
+    "y": 276,
+    "nozzle_left": [
+     105.32,
+     82.92
+    ],
+    "nozzle_right": [
+     106.58,
+     58.95
+    ]
+   },
+   {
+    "index": 31,
+    "angle": -84,
+    "x": 966,
+    "y": 276,
+    "nozzle_left": [
+     104.54,
+     84.8
+    ],
+    "nozzle_right": [
+     107.05,
+     60.93
+    ]
+   },
+   {
+    "index": 32,
+    "angle": -81,
+    "x": 1104,
+    "y": 276,
+    "nozzle_left": [
+     103.67,
+     86.64
+    ],
+    "nozzle_right": [
+     107.42,
+     62.94
+    ]
+   },
+   {
+    "index": 33,
+    "angle": -78,
+    "x": 1242,
+    "y": 276,
+    "nozzle_left": [
+     102.7,
+     88.43
+    ],
+    "nozzle_right": [
+     107.69,
+     64.95
+    ]
+   },
+   {
+    "index": 34,
+    "angle": -75,
+    "x": 1380,
+    "y": 276,
+    "nozzle_left": [
+     101.63,
+     90.17
+    ],
+    "nozzle_right": [
+     107.85,
+     66.99
+    ]
+   },
+   {
+    "index": 35,
+    "angle": -72,
+    "x": 1518,
+    "y": 276,
+    "nozzle_left": [
+     100.48,
+     91.85
+    ],
+    "nozzle_right": [
+     107.9,
+     69.02
+    ]
+   },
+   {
+    "index": 36,
+    "angle": -69,
+    "x": 0,
+    "y": 414,
+    "nozzle_left": [
+     99.24,
+     93.46
+    ],
+    "nozzle_right": [
+     107.84,
+     71.06
+    ]
+   },
+   {
+    "index": 37,
+    "angle": -66,
+    "x": 138,
+    "y": 414,
+    "nozzle_left": [
+     97.92,
+     95.01
+    ],
+    "nozzle_right": [
+     107.68,
+     73.09
+    ]
+   },
+   {
+    "index": 38,
+    "angle": -63,
+    "x": 276,
+    "y": 414,
+    "nozzle_left": [
+     96.52,
+     96.49
+    ],
+    "nozzle_right": [
+     107.42,
+     75.11
+    ]
+   },
+   {
+    "index": 39,
+    "angle": -60,
+    "x": 414,
+    "y": 414,
+    "nozzle_left": [
+     95.04,
+     97.89
+    ],
+    "nozzle_right": [
+     107.04,
+     77.11
+    ]
+   },
+   {
+    "index": 40,
+    "angle": -57,
+    "x": 552,
+    "y": 414,
+    "nozzle_left": [
+     93.5,
+     99.22
+    ],
+    "nozzle_right": [
+     106.57,
+     79.09
+    ]
+   },
+   {
+    "index": 41,
+    "angle": -54,
+    "x": 690,
+    "y": 414,
+    "nozzle_left": [
+     91.88,
+     100.46
+    ],
+    "nozzle_right": [
+     105.99,
+     81.04
+    ]
+   },
+   {
+    "index": 42,
+    "angle": -51,
+    "x": 828,
+    "y": 414,
+    "nozzle_left": [
+     90.2,
+     101.61
+    ],
+    "nozzle_right": [
+     105.31,
+     82.96
+    ]
+   },
+   {
+    "index": 43,
+    "angle": -48,
+    "x": 966,
+    "y": 414,
+    "nozzle_left": [
+     88.47,
+     102.68
+    ],
+    "nozzle_right": [
+     104.53,
+     84.84
+    ]
+   },
+   {
+    "index": 44,
+    "angle": -45,
+    "x": 1104,
+    "y": 414,
+    "nozzle_left": [
+     86.68,
+     103.65
+    ],
+    "nozzle_right": [
+     103.65,
+     86.68
+    ]
+   },
+   {
+    "index": 45,
+    "angle": -42,
+    "x": 1242,
+    "y": 414,
+    "nozzle_left": [
+     84.84,
+     104.53
+    ],
+    "nozzle_right": [
+     102.68,
+     88.47
+    ]
+   },
+   {
+    "index": 46,
+    "angle": -39,
+    "x": 1380,
+    "y": 414,
+    "nozzle_left": [
+     82.96,
+     105.31
+    ],
+    "nozzle_right": [
+     101.61,
+     90.2
+    ]
+   },
+   {
+    "index": 47,
+    "angle": -36,
+    "x": 1518,
+    "y": 414,
+    "nozzle_left": [
+     81.04,
+     105.99
+    ],
+    "nozzle_right": [
+     100.46,
+     91.88
+    ]
+   },
+   {
+    "index": 48,
+    "angle": -33,
+    "x": 0,
+    "y": 552,
+    "nozzle_left": [
+     79.09,
+     106.57
+    ],
+    "nozzle_right": [
+     99.22,
+     93.5
+    ]
+   },
+   {
+    "index": 49,
+    "angle": -30,
+    "x": 138,
+    "y": 552,
+    "nozzle_left": [
+     77.11,
+     107.04
+    ],
+    "nozzle_right": [
+     97.89,
+     95.04
+    ]
+   },
+   {
+    "index": 50,
+    "angle": -27,
+    "x": 276,
+    "y": 552,
+    "nozzle_left": [
+     75.11,
+     107.42
+    ],
+    "nozzle_right": [
+     96.49,
+     96.52
+    ]
+   },
+   {
+    "index": 51,
+    "angle": -24,
+    "x": 414,
+    "y": 552,
+    "nozzle_left": [
+     73.09,
+     107.68
+    ],
+    "nozzle_right": [
+     95.01,
+     97.92
+    ]
+   },
+   {
+    "index": 52,
+    "angle": -21,
+    "x": 552,
+    "y": 552,
+    "nozzle_left": [
+     71.06,
+     107.84
+    ],
+    "nozzle_right": [
+     93.46,
+     99.24
+    ]
+   },
+   {
+    "index": 53,
+    "angle": -18,
+    "x": 690,
+    "y": 552,
+    "nozzle_left": [
+     69.02,
+     107.9
+    ],
+    "nozzle_right": [
+     91.85,
+     100.48
+    ]
+   },
+   {
+    "index": 54,
+    "angle": -15,
+    "x": 828,
+    "y": 552,
+    "nozzle_left": [
+     66.99,
+     107.85
+    ],
+    "nozzle_right": [
+     90.17,
+     101.63
+    ]
+   },
+   {
+    "index": 55,
+    "angle": -12,
+    "x": 966,
+    "y": 552,
+    "nozzle_left": [
+     64.95,
+     107.69
+    ],
+    "nozzle_right": [
+     88.43,
+     102.7
+    ]
+   },
+   {
+    "index": 56,
+    "angle": -9,
+    "x": 1104,
+    "y": 552,
+    "nozzle_left": [
+     62.94,
+     107.42
+    ],
+    "nozzle_right": [
+     86.64,
+     103.67
+    ]
+   },
+   {
+    "index": 57,
+    "angle": -6,
+    "x": 1242,
+    "y": 552,
+    "nozzle_left": [
+     60.93,
+     107.05
+    ],
+    "nozzle_right": [
+     84.8,
+     104.54
+    ]
+   },
+   {
+    "index": 58,
+    "angle": -3,
+    "x": 1380,
+    "y": 552,
+    "nozzle_left": [
+     58.95,
+     106.58
+    ],
+    "nozzle_right": [
+     82.92,
+     105.32
+    ]
+   },
+   {
+    "index": 59,
+    "angle": 0,
+    "x": 1518,
+    "y": 552,
+    "nozzle_left": [
+     57.0,
+     106.0
+    ],
+    "nozzle_right": [
+     81.0,
+     106.0
+    ]
+   },
+   {
+    "index": 60,
+    "angle": 3,
+    "x": 0,
+    "y": 690,
+    "nozzle_left": [
+     55.08,
+     105.32
+    ],
+    "nozzle_right": [
+     79.05,
+     106.58
+    ]
+   },
+   {
+    "index": 61,
+    "angle": 6,
+    "x": 138,
+    "y": 690,
+    "nozzle_left": [
+     53.2,
+     104.54
+    ],
+    "nozzle_right": [
+     77.07,
+     107.05
+    ]
+   },
+   {
+    "index": 62,
+    "angle": 9,
+    "x": 276,
+    "y": 690,
+    "nozzle_left": [
+     51.36,
+     103.67
+    ],
+    "nozzle_right": [
+     75.06,
+     107.42
+    ]
+   },
+   {
+    "index": 63,
+    "angle": 12,
+    "x": 414,
+    "y": 690,
+    "nozzle_left": [
+     49.57,
+     102.7
+    ],
+    "nozzle_right": [
+     73.05,
+     107.69
+    ]
+   },
+   {
+    "index": 64,
+    "angle": 15,
+    "x": 552,
+    "y": 690,
+    "nozzle_left": [
+     47.83,
+     101.63
+    ],
+    "nozzle_right": [
+     71.01,
+     107.85
+    ]
+   },
+   {
+    "index": 65,
+    "angle": 18,
+    "x": 690,
+    "y": 690,
+    "nozzle_left": [
+     46.15,
+     100.48
+    ],
+    "nozzle_right": [
+     68.98,
+     107.9
+    ]
+   },
+   {
+    "index": 66,
+    "angle": 21,
+    "x": 828,
+    "y": 690,
+    "nozzle_left": [
+     44.54,
+     99.24
+    ],
+    "nozzle_right": [
+     66.94,
+     107.84
+    ]
+   },
+   {
+    "index": 67,
+    "angle": 24,
+    "x": 966,
+    "y": 690,
+    "nozzle_left": [
+     42.99,
+     97.92
+    ],
+    "nozzle_right": [
+     64.91,
+     107.68
+    ]
+   },
+   {
+    "index": 68,
+    "angle": 27,
+    "x": 1104,
+    "y": 690,
+    "nozzle_left": [
+     41.51,
+     96.52
+    ],
+    "nozzle_right": [
+     62.89,
+     107.42
+    ]
+   },
+   {
+    "index": 69,
+    "angle": 30,
+    "x": 1242,
+    "y": 690,
+    "nozzle_left": [
+     40.11,
+     95.04
+    ],
+    "nozzle_right": [
+     60.89,
+     107.04
+    ]
+   },
+   {
+    "index": 70,
+    "angle": 33,
+    "x": 1380,
+    "y": 690,
+    "nozzle_left": [
+     38.78,
+     93.5
+    ],
+    "nozzle_right": [
+     58.91,
+     106.57
+    ]
+   },
+   {
+    "index": 71,
+    "angle": 36,
+    "x": 1518,
+    "y": 690,
+    "nozzle_left": [
+     37.54,
+     91.88
+    ],
+    "nozzle_right": [
+     56.96,
+     105.99
+    ]
+   },
+   {
+    "index": 72,
+    "angle": 39,
+    "x": 0,
+    "y": 828,
+    "nozzle_left": [
+     36.39,
+     90.2
+    ],
+    "nozzle_right": [
+     55.04,
+     105.31
+    ]
+   },
+   {
+    "index": 73,
+    "angle": 42,
+    "x": 138,
+    "y": 828,
+    "nozzle_left": [
+     35.32,
+     88.47
+    ],
+    "nozzle_right": [
+     53.16,
+     104.53
+    ]
+   },
+   {
+    "index": 74,
+    "angle": 45,
+    "x": 276,
+    "y": 828,
+    "nozzle_left": [
+     34.35,
+     86.68
+    ],
+    "nozzle_right": [
+     51.32,
+     103.65
+    ]
+   },
+   {
+    "index": 75,
+    "angle": 48,
+    "x": 414,
+    "y": 828,
+    "nozzle_left": [
+     33.47,
+     84.84
+    ],
+    "nozzle_right": [
+     49.53,
+     102.68
+    ]
+   },
+   {
+    "index": 76,
+    "angle": 51,
+    "x": 552,
+    "y": 828,
+    "nozzle_left": [
+     32.69,
+     82.96
+    ],
+    "nozzle_right": [
+     47.8,
+     101.61
+    ]
+   },
+   {
+    "index": 77,
+    "angle": 54,
+    "x": 690,
+    "y": 828,
+    "nozzle_left": [
+     32.01,
+     81.04
+    ],
+    "nozzle_right": [
+     46.12,
+     100.46
+    ]
+   },
+   {
+    "index": 78,
+    "angle": 57,
+    "x": 828,
+    "y": 828,
+    "nozzle_left": [
+     31.43,
+     79.09
+    ],
+    "nozzle_right": [
+     44.5,
+     99.22
+    ]
+   },
+   {
+    "index": 79,
+    "angle": 60,
+    "x": 966,
+    "y": 828,
+    "nozzle_left": [
+     30.96,
+     77.11
+    ],
+    "nozzle_right": [
+     42.96,
+     97.89
+    ]
+   },
+   {
+    "index": 80,
+    "angle": 63,
+    "x": 1104,
+    "y": 828,
+    "nozzle_left": [
+     30.58,
+     75.11
+    ],
+    "nozzle_right": [
+     41.48,
+     96.49
+    ]
+   },
+   {
+    "index": 81,
+    "angle": 66,
+    "x": 1242,
+    "y": 828,
+    "nozzle_left": [
+     30.32,
+     73.09
+    ],
+    "nozzle_right": [
+     40.08,
+     95.01
+    ]
+   },
+   {
+    "index": 82,
+    "angle": 69,
+    "x": 1380,
+    "y": 828,
+    "nozzle_left": [
+     30.16,
+     71.06
+    ],
+    "nozzle_right": [
+     38.76,
+     93.46
+    ]
+   },
+   {
+    "index": 83,
+    "angle": 72,
+    "x": 1518,
+    "y": 828,
+    "nozzle_left": [
+     30.1,
+     69.02
+    ],
+    "nozzle_right": [
+     37.52,
+     91.85
+    ]
+   },
+   {
+    "index": 84,
+    "angle": 75,
+    "x": 0,
+    "y": 966,
+    "nozzle_left": [
+     30.15,
+     66.99
+    ],
+    "nozzle_right": [
+     36.37,
+     90.17
+    ]
+   },
+   {
+    "index": 85,
+    "angle": 78,
+    "x": 138,
+    "y": 966,
+    "nozzle_left": [
+     30.31,
+     64.95
+    ],
+    "nozzle_right": [
+     35.3,
+     88.43
+    ]
+   },
+   {
+    "index": 86,
+    "angle": 81,
+    "x": 276,
+    "y": 966,
+    "nozzle_left": [
+     30.58,
+     62.94
+    ],
+    "nozzle_right": [
+     34.33,
+     86.64
+    ]
+   },
+   {
+    "index": 87,
+    "angle": 84,
+    "x": 414,
+    "y": 966,
+    "nozzle_left": [
+     30.95,
+     60.93
+    ],
+    "nozzle_right": [
+     33.46,
+     84.8
+    ]
+   },
+   {
+    "index": 88,
+    "angle": 87,
+    "x": 552,
+    "y": 966,
+    "nozzle_left": [
+     31.42,
+     58.95
+    ],
+    "nozzle_right": [
+     32.68,
+     82.92
+    ]
+   },
+   {
+    "index": 89,
+    "angle": 90,
+    "x": 690,
+    "y": 966,
+    "nozzle_left": [
+     32.0,
+     57.0
+    ],
+    "nozzle_right": [
+     32.0,
+     81.0
+    ]
+   },
+   {
+    "index": 90,
+    "angle": 93,
+    "x": 828,
+    "y": 966,
+    "nozzle_left": [
+     32.68,
+     55.08
+    ],
+    "nozzle_right": [
+     31.42,
+     79.05
+    ]
+   },
+   {
+    "index": 91,
+    "angle": 96,
+    "x": 966,
+    "y": 966,
+    "nozzle_left": [
+     33.46,
+     53.2
+    ],
+    "nozzle_right": [
+     30.95,
+     77.07
+    ]
+   },
+   {
+    "index": 92,
+    "angle": 99,
+    "x": 1104,
+    "y": 966,
+    "nozzle_left": [
+     34.33,
+     51.36
+    ],
+    "nozzle_right": [
+     30.58,
+     75.06
+    ]
+   },
+   {
+    "index": 93,
+    "angle": 102,
+    "x": 1242,
+    "y": 966,
+    "nozzle_left": [
+     35.3,
+     49.57
+    ],
+    "nozzle_right": [
+     30.31,
+     73.05
+    ]
+   },
+   {
+    "index": 94,
+    "angle": 105,
+    "x": 1380,
+    "y": 966,
+    "nozzle_left": [
+     36.37,
+     47.83
+    ],
+    "nozzle_right": [
+     30.15,
+     71.01
+    ]
+   },
+   {
+    "index": 95,
+    "angle": 108,
+    "x": 1518,
+    "y": 966,
+    "nozzle_left": [
+     37.52,
+     46.15
+    ],
+    "nozzle_right": [
+     30.1,
+     68.98
+    ]
+   },
+   {
+    "index": 96,
+    "angle": 111,
+    "x": 0,
+    "y": 1104,
+    "nozzle_left": [
+     38.76,
+     44.54
+    ],
+    "nozzle_right": [
+     30.16,
+     66.94
+    ]
+   },
+   {
+    "index": 97,
+    "angle": 114,
+    "x": 138,
+    "y": 1104,
+    "nozzle_left": [
+     40.08,
+     42.99
+    ],
+    "nozzle_right": [
+     30.32,
+     64.91
+    ]
+   },
+   {
+    "index": 98,
+    "angle": 117,
+    "x": 276,
+    "y": 1104,
+    "nozzle_left": [
+     41.48,
+     41.51
+    ],
+    "nozzle_right": [
+     30.58,
+     62.89
+    ]
+   },
+   {
+    "index": 99,
+    "angle": 120,
+    "x": 414,
+    "y": 1104,
+    "nozzle_left": [
+     42.96,
+     40.11
+    ],
+    "nozzle_right": [
+     30.96,
+     60.89
+    ]
+   },
+   {
+    "index": 100,
+    "angle": 123,
+    "x": 552,
+    "y": 1104,
+    "nozzle_left": [
+     44.5,
+     38.78
+    ],
+    "nozzle_right": [
+     31.43,
+     58.91
+    ]
+   },
+   {
+    "index": 101,
+    "angle": 126,
+    "x": 690,
+    "y": 1104,
+    "nozzle_left": [
+     46.12,
+     37.54
+    ],
+    "nozzle_right": [
+     32.01,
+     56.96
+    ]
+   },
+   {
+    "index": 102,
+    "angle": 129,
+    "x": 828,
+    "y": 1104,
+    "nozzle_left": [
+     47.8,
+     36.39
+    ],
+    "nozzle_right": [
+     32.69,
+     55.04
+    ]
+   },
+   {
+    "index": 103,
+    "angle": 132,
+    "x": 966,
+    "y": 1104,
+    "nozzle_left": [
+     49.53,
+     35.32
+    ],
+    "nozzle_right": [
+     33.47,
+     53.16
+    ]
+   },
+   {
+    "index": 104,
+    "angle": 135,
+    "x": 1104,
+    "y": 1104,
+    "nozzle_left": [
+     51.32,
+     34.35
+    ],
+    "nozzle_right": [
+     34.35,
+     51.32
+    ]
+   },
+   {
+    "index": 105,
+    "angle": 138,
+    "x": 1242,
+    "y": 1104,
+    "nozzle_left": [
+     53.16,
+     33.47
+    ],
+    "nozzle_right": [
+     35.32,
+     49.53
+    ]
+   },
+   {
+    "index": 106,
+    "angle": 141,
+    "x": 1380,
+    "y": 1104,
+    "nozzle_left": [
+     55.04,
+     32.69
+    ],
+    "nozzle_right": [
+     36.39,
+     47.8
+    ]
+   },
+   {
+    "index": 107,
+    "angle": 144,
+    "x": 1518,
+    "y": 1104,
+    "nozzle_left": [
+     56.96,
+     32.01
+    ],
+    "nozzle_right": [
+     37.54,
+     46.12
+    ]
+   },
+   {
+    "index": 108,
+    "angle": 147,
+    "x": 0,
+    "y": 1242,
+    "nozzle_left": [
+     58.91,
+     31.43
+    ],
+    "nozzle_right": [
+     38.78,
+     44.5
+    ]
+   },
+   {
+    "index": 109,
+    "angle": 150,
+    "x": 138,
+    "y": 1242,
+    "nozzle_left": [
+     60.89,
+     30.96
+    ],
+    "nozzle_right": [
+     40.11,
+     42.96
+    ]
+   },
+   {
+    "index": 110,
+    "angle": 153,
+    "x": 276,
+    "y": 1242,
+    "nozzle_left": [
+     62.89,
+     30.58
+    ],
+    "nozzle_right": [
+     41.51,
+     41.48
+    ]
+   },
+   {
+    "index": 111,
+    "angle": 156,
+    "x": 414,
+    "y": 1242,
+    "nozzle_left": [
+     64.91,
+     30.32
+    ],
+    "nozzle_right": [
+     42.99,
+     40.08
+    ]
+   },
+   {
+    "index": 112,
+    "angle": 159,
+    "x": 552,
+    "y": 1242,
+    "nozzle_left": [
+     66.94,
+     30.16
+    ],
+    "nozzle_right": [
+     44.54,
+     38.76
+    ]
+   },
+   {
+    "index": 113,
+    "angle": 162,
+    "x": 690,
+    "y": 1242,
+    "nozzle_left": [
+     68.98,
+     30.1
+    ],
+    "nozzle_right": [
+     46.15,
+     37.52
+    ]
+   },
+   {
+    "index": 114,
+    "angle": 165,
+    "x": 828,
+    "y": 1242,
+    "nozzle_left": [
+     71.01,
+     30.15
+    ],
+    "nozzle_right": [
+     47.83,
+     36.37
+    ]
+   },
+   {
+    "index": 115,
+    "angle": 168,
+    "x": 966,
+    "y": 1242,
+    "nozzle_left": [
+     73.05,
+     30.31
+    ],
+    "nozzle_right": [
+     49.57,
+     35.3
+    ]
+   },
+   {
+    "index": 116,
+    "angle": 171,
+    "x": 1104,
+    "y": 1242,
+    "nozzle_left": [
+     75.06,
+     30.58
+    ],
+    "nozzle_right": [
+     51.36,
+     34.33
+    ]
+   },
+   {
+    "index": 117,
+    "angle": 174,
+    "x": 1242,
+    "y": 1242,
+    "nozzle_left": [
+     77.07,
+     30.95
+    ],
+    "nozzle_right": [
+     53.2,
+     33.46
+    ]
+   },
+   {
+    "index": 118,
+    "angle": 177,
+    "x": 1380,
+    "y": 1242,
+    "nozzle_left": [
+     79.05,
+     31.42
+    ],
+    "nozzle_right": [
+     55.08,
+     32.68
+    ]
+   },
+   {
+    "index": 119,
+    "angle": 180,
+    "x": 1518,
+    "y": 1242,
+    "nozzle_left": [
+     81.0,
+     32.0
+    ],
+    "nozzle_right": [
+     57.0,
+     32.0
+    ]
+   }
+  ]
+ },
+ "booster_flame": {
+  "frame_width": 22,
+  "frame_height": 58,
+  "anchor": {
+   "x": 11,
+   "y": 0
+  },
+  "levels": 11,
+  "how_to_use": "intensity 0..1 per booster -> level = round(intensity*10); loop that row. Draw before the rocket, anchor on the booster nozzle point for the current rotation frame, rotated by the frame angle around the anchor.",
+  "sets": {
+   "12fps": {
+    "fps": 12,
+    "loop_frames": 8,
+    "ramp_frames": 3,
+    "levels_sheet": "flames/12fps/booster_flame_levels.png",
+    "ramp_up": "flames/12fps/booster_flame_ramp_up.png",
+    "ramp_down": "flames/12fps/booster_flame_ramp_down.png",
+    "ramp_intensity_per_frame": [
+     0.0,
+     0.5,
+     1.0
+    ]
+   },
+   "24fps": {
+    "fps": 24,
+    "loop_frames": 16,
+    "ramp_frames": 6,
+    "levels_sheet": "flames/24fps/booster_flame_levels.png",
+    "ramp_up": "flames/24fps/booster_flame_ramp_up.png",
+    "ramp_down": "flames/24fps/booster_flame_ramp_down.png",
+    "ramp_intensity_per_frame": [
+     0.0,
+     0.104,
+     0.352,
+     0.648,
+     0.896,
+     1.0
+    ]
+   },
+   "60fps": {
+    "fps": 60,
+    "loop_frames": 40,
+    "ramp_frames": 15,
+    "levels_sheet": "flames/60fps/booster_flame_levels.png",
+    "ramp_up": "flames/60fps/booster_flame_ramp_up.png",
+    "ramp_down": "flames/60fps/booster_flame_ramp_down.png",
+    "ramp_intensity_per_frame": [
+     0.0,
+     0.015,
+     0.055,
+     0.118,
+     0.198,
+     0.292,
+     0.394,
+     0.5,
+     0.606,
+     0.708,
+     0.802,
+     0.882,
+     0.945,
+     0.985,
+     1.0
+    ]
+   }
+  }
+ }
+}

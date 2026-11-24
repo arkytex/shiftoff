@@ -1,0 +1,77 @@
+{
+ "frame_size": [
+  480,
+  210
+ ],
+ "sheet_layout": "Grids of up to 8 columns, frames in reading order.",
+ "ground_line_y": 154,
+ "rocket_nozzle_point": [
+  240,
+  144
+ ],
+ "placement": "Origin (0.5, 1) at the bottom of the initial screen, in world space.",
+ "layers": "launch_back behind the rocket, launch_front in front. Play launch once at lift-off, then loop 'after'.",
+ "animations": {
+  "idle": {
+   "file": "launchpad_idle.png",
+   "frames": 2,
+   "fps": 2,
+   "loop": true
+  },
+  "launch_back_24fps": {
+   "file": "launchpad_launch_back_24fps.png",
+   "frames": 60,
+   "fps": 24,
+   "loop": false
+  },
+  "launch_back_12fps": {
+   "file": "launchpad_launch_back_12fps.png",
+   "frames": 30,
+   "fps": 12,
+   "loop": false
+  },
+  "launch_front_24fps": {
+   "file": "launchpad_launch_front_24fps.png",
+   "frames": 60,
+   "fps": 24,
+   "loop": false
+  },
+  "launch_front_12fps": {
+   "file": "launchpad_launch_front_12fps.png",
+   "frames": 30,
+   "fps": 12,
+   "loop": false
+  },
+  "after_24fps": {
+   "file": "launchpad_after_24fps.png",
+   "frames": 16,
+   "fps": 24,
+   "loop": true
+  },
+  "after_12fps": {
+   "file": "launchpad_after_12fps.png",
+   "frames": 8,
+   "fps": 12,
+   "loop": true
+  }
+ },
+ "timeline_24fps": {
+  "clamps_release": [
+   0,
+   3
+  ],
+  "arm_swings_away": [
+   0,
+   6
+  ],
+  "exhaust_on_pad": [
+   0,
+   24
+  ],
+  "trench_glow_peak": [
+   3,
+   20
+  ],
+  "smoke_clears": 59
+ }
+}

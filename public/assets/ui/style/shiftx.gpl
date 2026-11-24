@@ -1,0 +1,101 @@
+GIMP Palette
+Name: ShiftX
+Columns: 8
+#
+ 22  20  42	ink_0
+ 59  58 121	sky_0
+ 54  52 113	sky_1
+ 50  47 107	sky_2
+ 46  43 100	sky_3
+ 42  39  92	sky_4
+244 247 255	star_0
+201 212 245	star_1
+111 120 196	star_2
+238 243 252	cloud_near_0
+221 230 248	cloud_near_1
+188 203 240	cloud_near_2
+159 178 230	cloud_near_3
+132 150 214	cloud_near_4
+110 127 196	cloud_near_5
+131 139 202	cloud_mid_0
+114 121 189	cloud_mid_1
+100 105 177	cloud_mid_2
+ 88  92 164	cloud_mid_3
+ 77  79 151	cloud_mid_4
+ 67  66 138	cloud_mid_5
+ 86  88 158	cloud_far_0
+ 76  76 145	cloud_far_1
+ 66  65 132	cloud_far_2
+ 58  56 120	cloud_far_3
+ 93 138 143	ground_0
+ 63 106 120	ground_1
+ 47  80 102	ground_2
+ 86  80 126	ground_3
+ 74  68 112	ground_4
+ 58  52  92	ground_5
+ 42  37  70	ground_6
+ 30  26  54	ground_7
+247 248 252	hull_0
+221 224 234	hull_1
+176 181 201	hull_2
+127 134 162	hull_3
+ 75  78  94	carbon_0
+ 44  46  58	carbon_1
+ 32  33  43	carbon_2
+ 21  22  29	carbon_3
+169 174 201	steel_0
+125 130 166	steel_1
+ 86  90 128	steel_2
+ 58  60  94	steel_3
+255 176 138	shiftx_0
+255 106  61	shiftx_1
+196  80  47	shiftx_2
+138  58  38	shiftx_3
+255 253 240	flame_0
+255 233 138	flame_1
+255 181  71	flame_2
+255 122  58	flame_3
+226  67  75	flame_4
+155  43  85	flame_5
+227 230 243	smoke_0
+195 200 222	smoke_1
+158 164 196	smoke_2
+124 130 166	smoke_3
+ 93  98 134	smoke_4
+ 69  72 104	smoke_5
+139 149 207	ui_night_0
+100 105 177	ui_night_1
+ 59  58 110	ui_night_2
+ 42  41  84	ui_night_3
+ 31  29  64	ui_night_4
+255 255 255	ui_paper_0
+243 244 250	ui_paper_1
+223 226 238	ui_paper_2
+185 190 219	ui_paper_3
+139 145 181	ui_paper_4
+255 242 179	gold_0
+255 210  92	gold_1
+224 154  42	gold_2
+154  90  26	gold_3
+166 245 232	shiftter_0
+ 63 199 180	shiftter_1
+ 40 144 127	shiftter_2
+ 27  95  86	shiftter_3
+255 154 176	like_0
+255  79 116	like_1
+194  44  82	like_2
+126  29  60	like_3
+127 240 176	hud_green_0
+ 63 201 131	hud_green_1
+ 42 143  99	hud_green_2
+255 224 138	hud_amber_0
+255 190  61	hud_amber_1
+201 134  34	hud_amber_2
+255 154 138	hud_red_0
+255  79  79	hud_red_1
+181  48  74	hud_red_2
+255 255 255	elec_0
+232 246 255	elec_1
+159 226 255	elec_2
+ 95 168 255	elec_3
+ 90  99 216	elec_4
