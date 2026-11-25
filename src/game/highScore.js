@@ -35,3 +35,23 @@ export function recordDeath() {
   }
   return deaths;
 }
+
+// Whether this browser has seen the mission briefing on the menu. Blocked storage means the
+// briefing shows every visit, which is harmless.
+const INTRO_KEY = "shiftx_seen_intro";
+
+export function hasSeenIntro() {
+  try {
+    return localStorage.getItem(INTRO_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function markIntroSeen() {
+  try {
+    localStorage.setItem(INTRO_KEY, "1");
+  } catch {
+    // shows again next visit
+  }
+}

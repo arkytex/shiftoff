@@ -82,6 +82,7 @@ export class GameOver extends Scene
         this.retry = retry;
         this.input.keyboard.once('keydown-ENTER', retry);
         this.input.keyboard.once('keydown-SPACE', retry);
+        this.input.keyboard.once('keydown-ESC', () => this.toMenu());
 
         // or both shift keys together. Only fresh presses count, so shifts still held from the
         // crash don't restart the game the moment this screen opens.
@@ -121,11 +122,19 @@ export class GameOver extends Scene
         }
 
         this.tryAgain = this.makeButton('Try again', () => this.retry());
+        this.menuButton = this.makeButton('Menu', () => this.toMenu());
         this.clickIcon = this.add.sprite(0, 0, 'ui_kit_click_icon').setOrigin(0).play('ui_kit_click_icon');
         // keyboard shortcut, not much use on a phone (small font is caps only)
         this.retryHint = isTouchDevice()
             ? null
             : addText(this, 0, 0, 'shiftx_small_outline', 'OR PRESS BOTH SHIFTS');
+    }
+
+    // back to the start screen: the Game scene is still running underneath, so stop it too
+    toMenu ()
+    {
+        this.scene.stop('Game');
+        this.scene.start('MainMenu');
     }
 
     // Button: one 9-slice per face, only the current one visible; a zone takes the clicks.
@@ -202,6 +211,8 @@ export class GameOver extends Scene
             centre(this.retryHint).setY(y + 2);
             y += 2 + this.retryHint.height;
         }
+        this.placeButton(this.menuButton, bx, y + 6);
+        y += 6 + BUTTON_H;
         return y - startY;
     }
 
