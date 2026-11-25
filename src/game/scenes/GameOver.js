@@ -19,9 +19,22 @@ const INK = 0x16142a;
 const MUTED = 0x8b91b5; // ui_paper[4], secondary text on paper
 const LIKE_RED = 0xff4f74;
 const GOLD = 0xffd25c;
-const LABEL_TOP = 4; // button label's first row, see placeLabel
 const BUTTON_W = 100;
 const BUTTON_H = 18;
+const PRIMARY_W = 120;
+// Button styles, most to least important. Try again is the only orange button; Share sits on a
+// dark panel that lights up orange on hover; Menu is plain text.
+const BUTTON_STYLES = {
+    // face art per state; labelTop is the label's first row, see placeLabel; drop is the pressed offset
+    primary: {
+        faces: { normal: 'ui_kit_button_normal', hover: 'ui_kit_button_hover', pressed: 'ui_kit_button_pressed' },
+        tint: INK, labelTop: 4, drop: 2
+    },
+    secondary: {
+        faces: { normal: 'ui_kit_panel_night', hover: 'ui_kit_panel_accent', pressed: 'ui_kit_panel_accent' },
+        tint: 0xffffff, labelTop: 5, drop: 1
+    }
+};
 const GAME_URL = 'https://arkytex.itch.io/shiftx';
 
 // card layout from ui/manifest.json (shiftter_card_bg), card-local pixels
@@ -121,8 +134,8 @@ export class GameOver extends Scene
                 `Best ${this.best.toLocaleString('en-US')}m`, { tint: GOLD });
         }
 
-        this.tryAgain = this.makeButton('Try again', () => this.retry());
-        this.menuButton = this.makeButton('Menu', () => this.toMenu());
+        this.tryAgain = this.makeButton('Try again', () => this.retry(), 'primary', PRIMARY_W);
+        this.menuLink = this.makeLink(isTouchDevice() ? 'Back to menu' : 'Back to menu (Esc)', () => this.toMenu());
         this.clickIcon = this.add.sprite(0, 0, 'ui_kit_click_icon').setOrigin(0).play('ui_kit_click_icon');
         // keyboard shortcut, not much use on a phone (small font is caps only)
         this.retryHint = isTouchDevice()
@@ -138,15 +151,16 @@ export class GameOver extends Scene
     }
 
     // Button: one 9-slice per face, only the current one visible; a zone takes the clicks.
-    makeButton (text, onClick)
+    makeButton (text, onClick, style = 'primary', w = BUTTON_W)
     {
-        const button = { faces: {}, face: 'normal' };
+        const st = BUTTON_STYLES[style];
+        const button = { faces: {}, face: 'normal', style: st };
         for (const face of ['normal', 'hover', 'pressed'])
         {
-            button.faces[face] = addPanel(this, `ui_kit_button_${face}`, 0, 0, BUTTON_W, BUTTON_H).setOrigin(0);
+            button.faces[face] = addPanel(this, st.faces[face], 0, 0, w, BUTTON_H).setOrigin(0);
         }
-        button.zone = this.add.zone(0, 0, BUTTON_W, BUTTON_H).setOrigin(0).setInteractive({ useHandCursor: true });
-        button.label = addText(this, 0, 0, 'shiftx_body', text, { tint: INK });
+        button.zone = this.add.zone(0, 0, w, BUTTON_H).setOrigin(0).setInteractive({ useHandCursor: true });
+        button.label = addText(this, 0, 0, 'shiftx_body', text, { tint: st.tint });
         const setFace = (face) =>
         {
             button.face = face;
@@ -165,6 +179,17 @@ export class GameOver extends Scene
         return button;
     }
 
+    // Text-only link for the least important action: muted, white on hover.
+    makeLink (text, onClick)
+    {
+        const link = addText(this, 0, 0, 'shiftx_body_outline', text, { tint: MUTED });
+        link.setInteractive({ useHandCursor: true });
+        link.on('pointerover', () => link.clearTint());
+        link.on('pointerout', () => link.setTint(MUTED));
+        link.on('pointerup', onClick);
+        return link;
+    }
+
     placeButton (button, x, y)
     {
         button.zone.setPosition(x, y);
@@ -175,13 +200,14 @@ export class GameOver extends Scene
     {
         const b = button.zone;
         for (const panel of Object.values(button.faces)) panel.setPosition(b.x, b.y);
-        // the orange face is rows 2..12 of the art (outline and highlight above, side below).
-        // shiftx_body caps are rows 0..6 of a glyph, so top row 4 centres them on the face with
-        // descenders still inside it. Pressed drops 2 px (label_offset_y in the manifest).
+        // shiftx_body caps are rows 0..6 of a glyph, so labelTop puts them in the middle of the
+        // face: the orange button's face is rows 2..12 (side below), a panel's inside is rows 1..16.
+        // The orange face drops 2 px when pressed (label_offset_y in the manifest).
+        const { labelTop, drop } = button.style;
         const glyphs = button.label.getTextBounds(true).local;
         button.label.setPosition(
             Math.round(b.x + b.width / 2 - (glyphs.x + glyphs.width / 2)),
-            b.y + LABEL_TOP + (button.face === 'pressed' ? 2 : 0)
+            b.y + labelTop + (button.face === 'pressed' ? drop : 0)
         );
     }
 
@@ -202,17 +228,17 @@ export class GameOver extends Scene
         y += extra.height + 6;
 
         // button centred in the column; the click hint hangs off its right side
-        const bx = Math.round(cx - BUTTON_W / 2);
+        const bx = Math.round(cx - PRIMARY_W / 2);
         this.placeButton(this.tryAgain, bx, y + 4);
-        this.clickIcon.setPosition(bx + BUTTON_W + 4, y);
+        this.clickIcon.setPosition(bx + PRIMARY_W + 4, y);
         y += this.clickIcon.height;
         if (this.retryHint)
         {
             centre(this.retryHint).setY(y + 2);
             y += 2 + this.retryHint.height;
         }
-        this.placeButton(this.menuButton, bx, y + 6);
-        y += 6 + BUTTON_H;
+        centre(this.menuLink).setY(y + 12);
+        y += 12 + this.menuLink.height;
         return y - startY;
     }
 
@@ -223,7 +249,7 @@ export class GameOver extends Scene
         this.feedHeader = this.add.image(0, 0, 'ui_gameover_shiftter_feed_header').setOrigin(0);
         const liked = Math.floor(Math.random() * this.posts.length); // one post gets a live like
         this.cards = this.posts.map((post, i) => this.buildCard(post, i === liked));
-        this.shareButton = this.makeButton('Share score', () => this.share());
+        this.shareButton = this.makeButton('Share score', () => this.share(), 'secondary');
     }
 
     // Shares the crash post with the score and a link: the phone's share sheet where there is one,
