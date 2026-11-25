@@ -69,3 +69,8 @@ Current layout: keycaps + balance meter across the **top**, altitude readout at 
 - PNG + `@4x` PNG for everything.
 - `manifest.json` per folder: frame size, frame count, fps, loop, plus 9-slice insets and font glyph order where relevant.
 - Transparent backgrounds; no baked-in text except where noted (labels like "ALT", "PEAK", "BEST", the banners and the countdown).
+
+## Title logo: SHIFTOFF!
+The game is now called **Shiftoff!** (ShiftX stays as the in-game rocket company). The menu still
+uses `ui/start/logo_animated.png`, which spells SHIFTX. Needed: the same treatment spelling
+SHIFTOFF!, same frame height (102 px sheet) and frame count, plus `logo_static` and its `@4x`.
