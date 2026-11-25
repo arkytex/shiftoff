@@ -1,4 +1,5 @@
 import { addText } from "./UI.js";
+import { isTouchDevice } from "./device.js";
 
 // In-game HUD, fixed to the screen, built from hud/ and ui/hud/ art.
 // Top: L SHIFT keycap + throttle gauge in the left corner, R SHIFT + gauge in the right, balance
@@ -33,6 +34,10 @@ export class Hud {
     this.altText = fixed(addText(scene, 0, 0, "shiftx_body_outline", "0"));
     this.bestText = fixed(addText(scene, 0, 0, "shiftx_small_outline", "", { tint: GOLD }));
     this.inDanger = false;
+    // on touch the big on-screen buttons show the shift state, so drop the small keycaps
+    this.showKeys = !isTouchDevice();
+    this.keyL.setVisible(this.showKeys);
+    this.keyR.setVisible(this.showKeys);
 
     this.layout(scene.scale);
     scene.scale.on("resize", this.layout, this);
@@ -44,7 +49,7 @@ export class Hud {
 
     this.keyL.setPosition(MARGIN, MARGIN);
     this.keyR.setPosition(width - MARGIN - this.keyR.width, MARGIN);
-    const gaugeY = MARGIN + this.keyL.height + 3;
+    const gaugeY = this.showKeys ? MARGIN + this.keyL.height + 3 : MARGIN;
     this.gaugeL.setPosition(MARGIN, gaugeY);
     this.gaugeR.setPosition(width - MARGIN - this.gaugeR.width, gaugeY);
 
@@ -122,7 +127,7 @@ export class Hud {
 
   setVisible(visible) {
     for (const o of [
-      this.keyL, this.keyR, this.gaugeL, this.gaugeR, this.meter, this.marker,
+      ...(this.showKeys ? [this.keyL, this.keyR] : []), this.gaugeL, this.gaugeR, this.meter, this.marker,
       this.altPlate, this.altText, this.bestText,
     ]) {
       o.setVisible(visible);

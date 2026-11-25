@@ -4,6 +4,8 @@ import { Launchpad } from "../Launchpad";
 import { Obstacles } from "../Obstacles";
 import { loadHighScore } from "../highScore";
 import { Hud } from "../Hud";
+import { TouchControls } from "../TouchControls.js";
+import { isTouchDevice } from "../device.js";
 import { Searchlights } from "../Searchlights";
 
 // --- tuning (px, seconds, radians) ---
@@ -97,6 +99,7 @@ export class Game extends Scene {
       .setOrigin(0.5, ROCKET_PIVOT_Y);
 
     this.hud = new Hud(this);
+    this.touch = isTouchDevice() ? new TouchControls(this) : null;
 
     // physics readout for tuning, hidden until ` (backtick) is pressed
     this.debug = this.add
@@ -138,11 +141,15 @@ export class Game extends Scene {
       return;
     }
 
+    // keyboard or the on-screen buttons
+    const leftDown = this.isLeftShiftDown || !!this.touch?.leftDown;
+    const rightDown = this.isRightShiftDown || !!this.touch?.rightDown;
+
     // throttle: ramps up while held, drains when released
-    this.tL = this.isLeftShiftDown
+    this.tL = leftDown
       ? Math.min(1, this.tL + RAMP_UP * dt)
       : Math.max(0, this.tL - RAMP_DOWN * dt);
-    this.tR = this.isRightShiftDown
+    this.tR = rightDown
       ? Math.min(1, this.tR + RAMP_UP * dt)
       : Math.max(0, this.tR - RAMP_DOWN * dt);
 
@@ -247,8 +254,8 @@ export class Game extends Scene {
     this.hud.update({
       tL: this.tL,
       tR: this.tR,
-      leftDown: this.isLeftShiftDown,
-      rightDown: this.isRightShiftDown,
+      leftDown,
+      rightDown,
       theta: this.theta,
       danger: this.danger / LOST_TIME,
       altM,
@@ -320,6 +327,7 @@ export class Game extends Scene {
     this.flameL.setVisible(false);
     this.flameR.setVisible(false);
     this.hud.setVisible(false);
+    this.touch?.setVisible(false);
 
     const altM = Math.max(0, (this.groundY - y) * M_PER_PX);
     const peakM = Math.max(this.peakAltM, altM);

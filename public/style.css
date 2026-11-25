@@ -3,11 +3,19 @@ body {
     padding: 0;
     color: rgba(255, 255, 255, 0.87);
     background-color: #000000;
+    /* touch: no scrolling, pinch zoom, text selection or long-press menus over the game */
+    touch-action: none;
+    overscroll-behavior: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #app {
     width: 100%;
     height: 100vh;
+    height: 100dvh; /* mobile: excludes the browser toolbars */
     overflow: hidden;
     display: flex;
     justify-content: center;

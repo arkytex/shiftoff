@@ -4,6 +4,7 @@ import { Launchpad } from "../Launchpad.js";
 import { Searchlights } from "../Searchlights.js";
 import { addText } from "../UI.js";
 import { loadHighScore } from "../highScore.js";
+import { isTouchDevice } from "../device.js";
 
 // rocket sprite: 48x101, centre of mass at (24, 62) — same placement as the Game scene
 const ROCKET_PIVOT_Y = 62 / 101;
@@ -29,9 +30,9 @@ export class MainMenu extends Scene {
       .setOrigin(0.5, ROCKET_PIVOT_Y);
 
     this.logo = this.add.sprite(0, 0, "ui_start_logo_animated").setOrigin(0).play("ui_start_logo_animated");
-    this.tagline = this.add.image(0, 0, "ui_start_tagline").setOrigin(0);
+    this.tagline = addText(this, 0, 0, "shiftx_body_outline", "Two buttons. It's not rocket science.");
     this.clickIcon = this.add.sprite(0, 0, "ui_kit_click_icon").setOrigin(0).play("ui_kit_click_icon");
-    this.prompt = addText(this, 0, 0, "shiftx_body_outline", "Click or press Shift to launch");
+    this.prompt = addText(this, 0, 0, "shiftx_body_outline", isTouchDevice() ? "Tap to launch" : "Click or press Shift to launch");
     this.controls = this.add.image(0, 0, "ui_start_controls_card").setOrigin(0);
 
     // best altitude, right-aligned in the plate's number slot (x 40..98, y 4)

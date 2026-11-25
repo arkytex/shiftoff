@@ -22,6 +22,8 @@ const config = {
   ...fitToWindow(),
   backgroundColor: "#2a275c", // top colour of the sky gradient, shown above it
   pixelArt: true,
+  // mouse + up to 3 fingers, so both on-screen shift buttons can be held at once
+  input: { activePointers: 3 },
   roundPixels: true,
   // NONE + integer zoom: we size the game ourselves, so Phaser must not rescale the canvas.
   scale: { mode: Scale.NONE, autoCenter: Scale.CENTER_BOTH },

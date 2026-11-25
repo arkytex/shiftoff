@@ -2,11 +2,13 @@ import { Scene } from 'phaser';
 import { loadHighScore, saveHighScore, recordDeath } from '../highScore.js';
 import { pickPost, toFontSafe } from '../posts.js';
 import { addPanel, addText } from '../UI.js';
+import { isTouchDevice } from '../device.js';
 
 // Game over, laid out like ui/mock_gameover.png and run as an overlay on top of the Game scene,
 // so the crash site stays visible behind a dim layer.
 // Left: result banner, altitude plate, NEW BEST ribbon, Try again button.
-// Right: a Shiftter feed of up to MAX_POSTS posts reacting to the crash (posts in posts.js).
+// Right: a Shiftter feed of up to MAX_POSTS posts reacting to the crash (posts in posts.js), with
+// a Share button under it.
 
 const MARGIN = 8;
 const COLUMN_GAP = 16;
@@ -17,6 +19,10 @@ const INK = 0x16142a;
 const MUTED = 0x8b91b5; // ui_paper[4], secondary text on paper
 const LIKE_RED = 0xff4f74;
 const GOLD = 0xffd25c;
+const LABEL_TOP = 4; // button label's first row, see placeLabel
+const BUTTON_W = 100;
+const BUTTON_H = 18;
+const GAME_URL = 'https://arkytex.itch.io/shiftx';
 
 // card layout from ui/manifest.json (shiftter_card_bg), card-local pixels
 const CARD = {
@@ -76,6 +82,17 @@ export class GameOver extends Scene
         this.retry = retry;
         this.input.keyboard.once('keydown-ENTER', retry);
         this.input.keyboard.once('keydown-SPACE', retry);
+
+        // or both shift keys together. Only fresh presses count, so shifts still held from the
+        // crash don't restart the game the moment this screen opens.
+        const held = new Set();
+        this.input.keyboard.on('keydown-SHIFT', (e) =>
+        {
+            if (e.repeat) return;
+            held.add(e.location);
+            if (held.has(1) && held.has(2)) retry();
+        });
+        this.input.keyboard.on('keyup-SHIFT', (e) => held.delete(e.location));
     }
 
     // ---- left column ------------------------------------------------------------------------
@@ -103,44 +120,59 @@ export class GameOver extends Scene
                 `Best ${this.best.toLocaleString('en-US')}m`, { tint: GOLD });
         }
 
-        // Try again button: one 9-slice per face, only the current one visible; a zone takes the
-        // clicks. The label drops 2 px when pressed (label_offset_y in the manifest).
-        const bw = 100;
-        const bh = 18;
-        this.faces = {};
+        this.tryAgain = this.makeButton('Try again', () => this.retry());
+        this.clickIcon = this.add.sprite(0, 0, 'ui_kit_click_icon').setOrigin(0).play('ui_kit_click_icon');
+        // keyboard shortcut, not much use on a phone (small font is caps only)
+        this.retryHint = isTouchDevice()
+            ? null
+            : addText(this, 0, 0, 'shiftx_small_outline', 'OR PRESS BOTH SHIFTS');
+    }
+
+    // Button: one 9-slice per face, only the current one visible; a zone takes the clicks.
+    makeButton (text, onClick)
+    {
+        const button = { faces: {}, face: 'normal' };
         for (const face of ['normal', 'hover', 'pressed'])
         {
-            this.faces[face] = addPanel(this, `ui_kit_button_${face}`, 0, 0, bw, bh).setOrigin(0);
+            button.faces[face] = addPanel(this, `ui_kit_button_${face}`, 0, 0, BUTTON_W, BUTTON_H).setOrigin(0);
         }
-        this.button = this.add.zone(0, 0, bw, bh).setOrigin(0).setInteractive({ useHandCursor: true });
-        this.buttonLabel = addText(this, 0, 0, 'shiftx_body', 'Try again', { tint: INK });
-        this.clickIcon = this.add.sprite(0, 0, 'ui_kit_click_icon').setOrigin(0).play('ui_kit_click_icon');
-        this.setFace('normal');
-
-        this.button.on('pointerover', () => this.setFace('hover'));
-        this.button.on('pointerout', () => this.setFace('normal'));
-        this.button.on('pointerdown', () => this.setFace('pressed'));
-        this.button.on('pointerup', () => this.retry());
+        button.zone = this.add.zone(0, 0, BUTTON_W, BUTTON_H).setOrigin(0).setInteractive({ useHandCursor: true });
+        button.label = addText(this, 0, 0, 'shiftx_body', text, { tint: INK });
+        const setFace = (face) =>
+        {
+            button.face = face;
+            for (const [name, panel] of Object.entries(button.faces)) panel.setVisible(name === face);
+            this.placeLabel(button);
+        };
+        setFace('normal');
+        button.zone.on('pointerover', () => setFace('hover'));
+        button.zone.on('pointerout', () => setFace('normal'));
+        button.zone.on('pointerdown', () => setFace('pressed'));
+        button.zone.on('pointerup', () =>
+        {
+            setFace('hover');
+            onClick();
+        });
+        return button;
     }
 
-    setFace (face)
+    placeButton (button, x, y)
     {
-        this.face = face;
-        for (const [name, panel] of Object.entries(this.faces)) panel.setVisible(name === face);
-        this.placeButtonLabel();
+        button.zone.setPosition(x, y);
+        this.placeLabel(button);
     }
 
-    placeButtonLabel ()
+    placeLabel (button)
     {
-        const b = this.button;
-        for (const panel of Object.values(this.faces)) panel.setPosition(b.x, b.y);
-        // centre the visible glyphs (not the font's line box) on the face; the bottom 6 px of the
-        // art is the button's side, and the face drops 2 px when pressed
-        const glyphs = this.buttonLabel.getTextBounds(true).local;
-        const faceH = b.height - 6 + (this.face === 'pressed' ? 4 : 0);
-        this.buttonLabel.setPosition(
+        const b = button.zone;
+        for (const panel of Object.values(button.faces)) panel.setPosition(b.x, b.y);
+        // the orange face is rows 2..12 of the art (outline and highlight above, side below).
+        // shiftx_body caps are rows 0..6 of a glyph, so top row 4 centres them on the face with
+        // descenders still inside it. Pressed drops 2 px (label_offset_y in the manifest).
+        const glyphs = button.label.getTextBounds(true).local;
+        button.label.setPosition(
             Math.round(b.x + b.width / 2 - (glyphs.x + glyphs.width / 2)),
-            Math.round(b.y + faceH / 2 - (glyphs.y + glyphs.height / 2))
+            b.y + LABEL_TOP + (button.face === 'pressed' ? 2 : 0)
         );
     }
 
@@ -161,10 +193,15 @@ export class GameOver extends Scene
         y += extra.height + 6;
 
         // button centred in the column; the click hint hangs off its right side
-        this.button.setPosition(Math.round(cx - this.button.width / 2), y + 4);
-        this.clickIcon.setPosition(this.button.x + this.button.width + 4, y);
-        this.placeButtonLabel();
+        const bx = Math.round(cx - BUTTON_W / 2);
+        this.placeButton(this.tryAgain, bx, y + 4);
+        this.clickIcon.setPosition(bx + BUTTON_W + 4, y);
         y += this.clickIcon.height;
+        if (this.retryHint)
+        {
+            centre(this.retryHint).setY(y + 2);
+            y += 2 + this.retryHint.height;
+        }
         return y - startY;
     }
 
@@ -175,6 +212,26 @@ export class GameOver extends Scene
         this.feedHeader = this.add.image(0, 0, 'ui_gameover_shiftter_feed_header').setOrigin(0);
         const liked = Math.floor(Math.random() * this.posts.length); // one post gets a live like
         this.cards = this.posts.map((post, i) => this.buildCard(post, i === liked));
+        this.shareButton = this.makeButton('Share score', () => this.share());
+    }
+
+    // Shares the crash post with the score and a link: the phone's share sheet where there is one,
+    // otherwise a post composer on X in a new tab.
+    share ()
+    {
+        const post = this.posts[0];
+        const score = this.score.toLocaleString('en-US');
+        const text = `"${post.text}" - @${post.author.handle}\n\n`
+            + `I got my rocket to ${score}m in ShiftX. You fly it with the two Shift keys. Beat me:`;
+        if (navigator.share)
+        {
+            navigator.share({ title: 'ShiftX', text, url: GAME_URL }).catch(() => {});
+            return;
+        }
+        const intent = new URL('https://x.com/intent/post');
+        intent.searchParams.set('text', text);
+        intent.searchParams.set('url', GAME_URL);
+        window.open(intent, '_blank', 'noopener');
     }
 
     buildCard ({ author, text }, liked)
@@ -290,7 +347,8 @@ export class GameOver extends Scene
         }
 
         // as many posts as fit, the crash-specific one first; feed centred vertically in its space
-        let used = this.feedHeader.height;
+        const shareH = 6 + BUTTON_H;
+        let used = this.feedHeader.height + shareH;
         let shown = 0;
         for (const card of this.cards)
         {
@@ -311,6 +369,7 @@ export class GameOver extends Scene
                 y += card.h;
             }
         });
+        this.placeButton(this.shareButton, Math.round(feedX + CARD.w / 2 - BUTTON_W / 2), y + 6);
     }
 }
 
