@@ -1,59 +1,111 @@
-# Builds the game and attaches it to a GitHub Release as ShiftX.zip.
-#   - Push a tag like v1.0.0  -> release "v1.0.0", and the build goes to itch.io
-#   - Run manually (Actions tab -> Release -> Run workflow) -> pre-release "build-<run number>"
-#     only (test builds don't go to itch)
+# Every push to main builds the game, picks the next version from the commit messages since the
+# last release, then tags it, makes a GitHub Release with ShiftX.zip and pushes the build to
+# itch.io (arkytex/shiftx).
+#
+# Version bump (conventional commits, since the last v* tag):
+#   feat!: / fix!: / "BREAKING CHANGE"  -> major
+#   feat:                               -> minor
+#   anything else                       -> patch
+#   first release                       -> v0.1.0
+#
+# No release when: only docs / markdown changed, the head commit says [skip release], or there
+# are no new commits since the last tag. "Run workflow" in the Actions tab releases main on demand.
 # itch.io upload needs a BUTLER_API_KEY repo secret (itch.io -> Settings -> API keys).
 name: Release
 
 on:
   push:
-    tags: ["v*"]
+    branches: [main]
+    paths-ignore:
+      - "docs/**"
+      - "**/*.md"
+      - "LICENSE"
   workflow_dispatch:
 
 permissions:
-  contents: write # create releases and upload the zip
+  contents: write # create tags and releases
+
+# one release at a time, in push order
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
   release:
+    if: ${{ !contains(github.event.head_commit.message, '[skip release]') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history + tags, to find the last release
+
+      - name: Next version
+        id: version
+        run: |
+          last=$(git describe --tags --abbrev=0 --match 'v*' 2>/dev/null || true)
+          if [ -z "$last" ]; then
+            echo "next=v0.1.0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          msgs=$(git log --format='%s%n%b' "$last..HEAD")
+          if [ -z "$msgs" ]; then
+            echo "No commits since $last; nothing to release."
+            echo "next=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          IFS=. read -r major minor patch <<< "${last#v}"
+          if echo "$msgs" | grep -qE '^[a-z]+(\([^)]*\))?!:|BREAKING CHANGE'; then
+            major=$((major + 1)); minor=0; patch=0
+          elif echo "$msgs" | grep -qE '^feat(\([^)]*\))?:'; then
+            minor=$((minor + 1)); patch=0
+          else
+            patch=$((patch + 1))
+          fi
+          echo "Last release $last -> v$major.$minor.$patch"
+          echo "next=v$major.$minor.$patch" >> "$GITHUB_OUTPUT"
 
       - uses: pnpm/action-setup@v4
+        if: steps.version.outputs.next != ''
         with:
           version: 11
 
       - uses: actions/setup-node@v4
+        if: steps.version.outputs.next != ''
         with:
           node-version: 24
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      - if: steps.version.outputs.next != ''
+        run: pnpm install --frozen-lockfile
 
       # build-nolog: the plain build script pings the template author's server
-      - run: pnpm run build-nolog
+      - if: steps.version.outputs.next != ''
+        run: pnpm run build-nolog
 
       # @4x previews and UI mockups are never loaded by the game, so leave them out
       - name: Zip build
+        if: steps.version.outputs.next != ''
         working-directory: dist
         run: zip -rq ../ShiftX.zip . -x '*@4x*' -x '*mock_*' -x '*.DS_Store'
 
-      - name: Publish release
+      # creates the tag on this commit as well as the release
+      - name: Tag and publish release
+        if: steps.version.outputs.next != ''
         env:
           GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.next }}
         run: |
-          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
-            gh release create "$GITHUB_REF_NAME" ShiftX.zip --title "ShiftX $GITHUB_REF_NAME" --generate-notes
-          else
-            tag="build-$GITHUB_RUN_NUMBER"
-            gh release create "$tag" ShiftX.zip --target "$GITHUB_SHA" --title "ShiftX $tag" --generate-notes --prerelease
-          fi
+          gh release create "$VERSION" ShiftX.zip --target "$GITHUB_SHA" \
+            --title "ShiftX $VERSION" --generate-notes
 
       # butler is itch.io's official uploader: only sends what changed, keeps version history
       - name: Push to itch.io (arkytex/shiftx)
-        if: github.ref_type == 'tag'
+        if: steps.version.outputs.next != ''
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+          VERSION: ${{ steps.version.outputs.next }}
         run: |
           if [ -z "$BUTLER_API_KEY" ]; then
             echo "::warning::BUTLER_API_KEY secret not set; skipping itch.io upload"
@@ -61,4 +113,4 @@ jobs:
           fi
           curl -sSfL -o butler.zip https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default
           unzip -q butler.zip -d butler && chmod +x butler/butler
-          ./butler/butler push ShiftX.zip arkytex/shiftx:html5 --userversion "$GITHUB_REF_NAME"
+          ./butler/butler push ShiftX.zip arkytex/shiftx:html5 --userversion "$VERSION"
