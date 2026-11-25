@@ -233,10 +233,10 @@ export class GameOver extends Scene
         const post = this.posts[0];
         const score = this.score.toLocaleString('en-US');
         const text = `"${post.text}" - @${post.author.handle}\n\n`
-            + `I got my rocket to ${score}m in Shiftoff! You fly it with the two Shift keys. Beat me:`;
+            + `I got my rocket to ${score}m in ShiftOff! You fly it with the two Shift keys. Beat me:`;
         if (navigator.share)
         {
-            navigator.share({ title: 'Shiftoff!', text, url: GAME_URL }).catch(() => {});
+            navigator.share({ title: 'ShiftOff!', text, url: GAME_URL }).catch(() => {});
             return;
         }
         const intent = new URL('https://x.com/intent/post');

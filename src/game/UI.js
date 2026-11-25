@@ -5,7 +5,7 @@ export const UI_IMAGES = {"ui_kit_panel_night": "kit/panel_night.png", "ui_kit_p
 
 export const UI_SHEETS = {
   ui_kit_click_icon: { file: "kit/click_icon.png", frameWidth: 26, frameHeight: 26, frames: 4, fps: 6, loop: true },
-  ui_start_logo_animated: { file: "start/logo_animated.png", frameWidth: 132, frameHeight: 34, frames: 24, fps: 12, loop: true },
+  ui_start_logo_animated: { file: "start/logo_animated.png", frameWidth: 180, frameHeight: 34, frames: 24, fps: 12, loop: true },
   ui_start_countdown: { file: "start/countdown.png", frameWidth: 128, frameHeight: 52, frames: 52, fps: 12, loop: false, ranges: {"3": [0, 11], "2": [12, 23], "1": [24, 35], "liftoff": [36, 51]} },
   ui_gameover_shiftter_icons: { file: "gameover/shiftter_icons.png", frameWidth: 13, frameHeight: 13, frames: 8, fps: 0, loop: false },
   ui_gameover_like_pop: { file: "gameover/like_pop.png", frameWidth: 26, frameHeight: 26, frames: 10, fps: 24, loop: false },

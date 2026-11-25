@@ -17,7 +17,7 @@ const BACKGROUND = [
 ];
 
 const HUD = [
-  "shiftx_logo",
+  "shiftoff_logo",
   "balance_meter",
   "balance_marker",
   "key_lshift_up",

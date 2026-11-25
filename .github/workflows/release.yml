@@ -1,5 +1,5 @@
 # Every push to main builds the game, picks the next version from the commit messages since the
-# last release, then tags it, makes a GitHub Release with Shiftoff.zip and pushes the build to
+# last release, then tags it, makes a GitHub Release with ShiftOff.zip and pushes the build to
 # itch.io (arkytex/shiftx).
 #
 # Version bump (conventional commits, since the last v* tag):
@@ -88,7 +88,7 @@ jobs:
       - name: Zip build
         if: steps.version.outputs.next != ''
         working-directory: dist
-        run: zip -rq ../Shiftoff.zip . -x '*@4x*' -x '*mock_*' -x '*.DS_Store'
+        run: zip -rq ../ShiftOff.zip . -x '*@4x*' -x '*mock_*' -x '*.DS_Store'
 
       # creates the tag on this commit as well as the release
       - name: Tag and publish release
@@ -97,8 +97,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           VERSION: ${{ steps.version.outputs.next }}
         run: |
-          gh release create "$VERSION" Shiftoff.zip --target "$GITHUB_SHA" \
-            --title "Shiftoff! $VERSION" --generate-notes
+          gh release create "$VERSION" ShiftOff.zip --target "$GITHUB_SHA" \
+            --title "ShiftOff! $VERSION" --generate-notes
 
       # butler is itch.io's official uploader: only sends what changed, keeps version history
       - name: Push to itch.io (arkytex/shiftx)
@@ -113,4 +113,4 @@ jobs:
           fi
           curl -sSfL -o butler.zip https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default
           unzip -q butler.zip -d butler && chmod +x butler/butler
-          ./butler/butler push Shiftoff.zip arkytex/shiftx:html5 --userversion "$VERSION"
+          ./butler/butler push ShiftOff.zip arkytex/shiftx:html5 --userversion "$VERSION"

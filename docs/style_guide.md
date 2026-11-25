@@ -1,6 +1,6 @@
-# ShiftX house style guide
+# ShiftOff! house style guide
 
-How every ShiftX asset is drawn, sized, packed and described. Follow this for anything new so it sits next to the existing art without looking out of place.
+How every ShiftOff! asset is drawn, sized, packed and described. Follow this for anything new so it sits next to the existing art without looking out of place.
 
 Companion files in this folder: `palette.png` (swatches), `palette.json`, `shiftx.gpl` (GIMP / Aseprite), `shiftx.hex` (Lospec / Pixelorama).
 
@@ -8,7 +8,7 @@ Companion files in this folder: `palette.png` (swatches), `palette.json`, `shift
 
 ## 1. The look in one paragraph
 
-Moonlit pixel art. A cool indigo night with lilac clouds, lit from the **upper left**. Hard-edged forms, 4-tone shading ramps, a 1px dark **ink** outline on everything you can touch (rocket, obstacles, UI) and no outline on scenery (sky, clouds, ground) or on effects (fire, smoke, light). Warm colours are rare and meaningful: ShiftX orange is the brand and "your rocket", flame colours mean thrust or danger, gold means a record.
+Moonlit pixel art. A cool indigo night with lilac clouds, lit from the **upper left**. Hard-edged forms, 4-tone shading ramps, a 1px dark **ink** outline on everything you can touch (rocket, obstacles, UI) and no outline on scenery (sky, clouds, ground) or on effects (fire, smoke, light). Warm colours are rare and meaningful: ShiftX orange is the brand (the OFF! in the game logo, the rocket's livery), flame colours mean thrust or danger, gold means a record.
 
 ## 2. Resolution and scale
 
@@ -36,7 +36,7 @@ Moonlit pixel art. A cool indigo night with lilac clouds, lit from the **upper l
 | `hull` | `#f7f8fc` `#dde0ea` `#b0b5c9` `#7f86a2` | Rocket body, white objects, light text on dark |
 | `carbon` | `#4b4e5e` `#2c2e3a` `#20212b` `#15161d` | Interstage, legs, black parts |
 | `steel` | `#a9aec9` `#7d82a6` `#565a80` `#3a3c5e` | Engines, tower, metal |
-| `shiftx` | `#ffb08a` `#ff6a3d` `#c4502f` `#8a3a26` | Brand orange: logo X, rocket stripes, primary buttons, "boom" |
+| `shiftx` | `#ffb08a` `#ff6a3d` `#c4502f` `#8a3a26` | Brand orange: OFF! in the game logo, ShiftX X mark, rocket stripes, primary buttons, "boom" |
 | `flame` | `#fffdf0` `#ffe98a` `#ffb547` `#ff7a3a` `#e2434b` `#9b2b55` | Thrust, fire, explosions (hot → cool) |
 | `smoke` | `#e3e6f3` `#c3c8de` `#9ea4c4` `#7c82a6` `#5d6286` `#454868` | Smoke, dust, steam |
 | `ui_night` | `#8b95cf` `#6469b1` `#3b3a6e` `#2a2954` `#1f1d40` | Dark panels, plates, HUD frames |
@@ -153,7 +153,9 @@ Older packs (rocket, launch pad, obstacles, effects) use the same field names un
 
 ## 12. Brand notes
 
-- **ShiftX** is fictional. Its mark is the wordmark plus an **X whose top-right arm ends in a shift-key arrow**. Don't use any real space company's logo, lettering or swoosh.
+- **ShiftOff!** is the game's title. The logo is SHIFT in white and OFF! in ShiftX orange, with the **"!" drawn as a shift-key arrow over a dot**. Use that "!" alone wherever the name won't fit (favicon, small badges). Files: `ui/start/logo_static.png`, `ui/start/logo_animated.png` (the "!" lifts off) and `shiftx/hud/shiftoff_logo.png` (1× HUD version).
+- **ShiftX** is the fictional rocket company inside the game: the SHIFTX lettering on the rocket, the @ShiftX accounts on Shiftter, #ShiftXFail. Its mark is an **X whose top-right arm ends in a shift-key arrow**. Don't use any real space company's logo, lettering or swoosh.
+- Asset, font and palette names keep the `shiftx_` prefix. It's the studio-wide namespace, so renaming the game doesn't break any keys.
 - **Shiftter** is a fictional social app. Its mark is a teal speech bubble with a shift arrow. The icons (reply, reshift, like, views, share) and the 8-point verified seal are original. Don't copy any real network's bird, X, badge shape or layout details.
 - Avatars are invented characters. Don't base one on a real person.
 

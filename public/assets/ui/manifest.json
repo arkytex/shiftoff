@@ -188,22 +188,22 @@
   },
   "start/logo_animated.png": {
    "size": [
-    1056,
+    1440,
     102
    ],
    "frame_size": [
-    132,
+    180,
     34
    ],
    "frames": 24,
    "fps": 12,
    "loop": true,
    "layout": "grid, 8 columns, reading order",
-   "note": "Native-size ShiftX logo: shine sweep, then the X arrow nudges up-right. Loop at 12 fps."
+   "note": "Native-size ShiftOff! logo: shine sweep, then the '!' arrow lifts off. Loop at 12 fps."
   },
   "start/logo_static.png": {
    "size": [
-    132,
+    180,
     34
    ]
   },
